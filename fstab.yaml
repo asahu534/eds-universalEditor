@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p24773-e1522172.adobeaemcloud.com"
+    url: "https://author-p24773-e1522172.adobeaemcloud.com/bin/franklin.delivery/asahu534/eds-universaleditor/main"
     type: "markup"
     suffix: ".html"
