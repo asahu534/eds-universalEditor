@@ -19,6 +19,40 @@
   --link-color: #3b63fb;
   --link-hover-color: #1d3ecf;
 
+  /* brand palette */
+  --color-brand: #3b63fb;
+  --color-brand-hover: #1d3ecf;
+  --color-brand-contrast: #fff;
+
+  /* semantic theme tokens (light is the default) */
+  --color-surface: var(--background-color);
+  --color-surface-muted: var(--light-color);
+  --color-on-surface: var(--text-color);
+  --color-on-surface-muted: #5b5b5b;
+  --color-border: #e6e6e6;
+  --color-accent: var(--color-brand);
+  --color-accent-hover: var(--color-brand-hover);
+  --color-accent-contrast: var(--color-brand-contrast);
+  --color-shadow: rgb(19 19 19 / 12%);
+
+  /* spacing scale */
+  --spacing-xs: 8px;
+  --spacing-s: 16px;
+  --spacing-m: 24px;
+  --spacing-l: 40px;
+  --spacing-xl: 64px;
+  --spacing-xxl: 96px;
+
+  /* radii & elevation */
+  --radius-s: 6px;
+  --radius-m: 12px;
+  --radius-l: 20px;
+  --shadow-card: 0 2px 8px var(--color-shadow);
+  --shadow-card-hover: 0 8px 24px var(--color-shadow);
+
+  /* layout */
+  --content-max-width: 1200px;
+
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
   --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
@@ -73,8 +107,8 @@
 body {
   display: none;
   margin: 0;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   line-height: 1.6;
@@ -82,6 +116,12 @@ body {
 
 body.appear {
   display: block;
+}
+
+/* accessible focus ring (both themes) */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 header {
@@ -301,7 +341,7 @@ main > .section {
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: var(--content-max-width);
   margin: auto;
   padding: 0 24px;
 }
@@ -319,7 +359,46 @@ main > .section:first-of-type {
 /* section metadata */
 main .section.light,
 main .section.highlight {
-  background-color: var(--light-color);
+  background-color: var(--color-surface-muted);
   margin: 0;
-  padding: 40px 0;
+  padding: var(--spacing-l) 0;
+}
+
+/* theme: explicit light section (overrides a dark default if ever set) */
+main .section.theme-light {
+  --color-surface: #fff;
+  --color-surface-muted: #f8f8f8;
+  --color-on-surface: #131313;
+  --color-on-surface-muted: #5b5b5b;
+  --color-border: #e6e6e6;
+  --color-shadow: rgb(19 19 19 / 12%);
+
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+}
+
+/* theme: dark section — authors pick "Dark" on the section style in UE */
+main .section.theme-dark {
+  --color-surface: #0f1420;
+  --color-surface-muted: #1a2030;
+  --color-on-surface: #f4f6fb;
+  --color-on-surface-muted: #aeb6c7;
+  --color-border: #2a3142;
+  --color-accent: #6b8afd;
+  --color-accent-hover: #93acff;
+  --color-accent-contrast: #0f1420;
+  --color-shadow: rgb(0 0 0 / 45%);
+
+  margin: 0;
+  padding: var(--spacing-l) 0;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+}
+
+main .section.theme-dark a:any-link {
+  color: var(--color-accent);
+}
+
+main .section.theme-dark a:hover {
+  color: var(--color-accent-hover);
 }

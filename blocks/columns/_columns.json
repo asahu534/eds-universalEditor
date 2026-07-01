@@ -33,6 +33,27 @@
           "name": "rows",
           "value": "",
           "label": "Rows"
+        },
+        {
+          "component": "select",
+          "name": "classes",
+          "label": "Layout",
+          "valueType": "string",
+          "value": "",
+          "options": [
+            {
+              "name": "Equal width",
+              "value": ""
+            },
+            {
+              "name": "Wide left",
+              "value": "wide-left"
+            },
+            {
+              "name": "Wide right",
+              "value": "wide-right"
+            }
+          ]
         }
       ]
     }

@@ -30,4 +30,9 @@
     flex: 1;
     order: unset;
   }
+
+  .columns.wide-left > div > div:first-child,
+  .columns.wide-right > div > div:last-child {
+    flex: 2;
+  }
 }

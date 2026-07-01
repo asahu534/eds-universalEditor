@@ -129,10 +129,19 @@
         "description": "The label shown for this section in the Content Tree"
       },
       {
-        "component": "multiselect",
+        "component": "select",
         "name": "style",
-        "label": "Style",
+        "label": "Theme",
+        "description": "Light or dark background for this section",
         "options": [
+          {
+            "name": "Light",
+            "value": "theme-light"
+          },
+          {
+            "name": "Dark",
+            "value": "theme-dark"
+          },
           {
             "name": "Highlight",
             "value": "highlight"
@@ -176,6 +185,101 @@
         "name": "rows",
         "value": "",
         "label": "Rows"
+      },
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Layout",
+        "valueType": "string",
+        "value": "",
+        "options": [
+          {
+            "name": "Equal width",
+            "value": ""
+          },
+          {
+            "name": "Wide left",
+            "value": "wide-left"
+          },
+          {
+            "name": "Wide right",
+            "value": "wide-right"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cta",
+    "fields": [
+      {
+        "component": "text",
+        "name": "eyebrow",
+        "label": "Eyebrow",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "label": "Heading & Body",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "button",
+        "label": "Button Link"
+      },
+      {
+        "component": "text",
+        "name": "buttonText",
+        "label": "Button Text",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Style",
+        "valueType": "string",
+        "value": "",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "Centered",
+            "value": "centered"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "feature",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon / Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "iconAlt",
+        "label": "Icon Alt Text",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "label": "Title & Description",
+        "valueType": "string",
+        "value": ""
       }
     ]
   },
@@ -207,11 +311,89 @@
         "value": ""
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow",
+        "value": ""
+      },
+      {
         "component": "richtext",
         "name": "text",
         "value": "",
         "label": "Text",
         "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "button",
+        "label": "Button Link"
+      },
+      {
+        "component": "text",
+        "name": "buttonText",
+        "label": "Button Text",
+        "valueType": "string",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "stat",
+    "fields": [
+      {
+        "component": "text",
+        "name": "value",
+        "label": "Value",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "label",
+        "label": "Label",
+        "valueType": "string",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "testimonial",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "quote",
+        "label": "Quote",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "photo",
+        "label": "Author Photo",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "photoAlt",
+        "label": "Photo Alt Text",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "author",
+        "label": "Author Name",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "role",
+        "label": "Author Role",
+        "valueType": "string",
+        "value": ""
       }
     ]
   },

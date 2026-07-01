@@ -26,10 +26,19 @@
           "description": "The label shown for this section in the Content Tree"
         },
         {
-          "component": "multiselect",
+          "component": "select",
           "name": "style",
-          "label": "Style",
+          "label": "Theme",
+          "description": "Light or dark background for this section",
           "options": [
+            {
+              "name": "Light",
+              "value": "theme-light"
+            },
+            {
+              "name": "Dark",
+              "value": "theme-dark"
+            },
             {
               "name": "Highlight",
               "value": "highlight"
@@ -50,6 +59,10 @@
         "hero",
         "cards",
         "columns",
+        "cta",
+        "features",
+        "testimonial",
+        "stats",
         "fragment"
       ]
     }
