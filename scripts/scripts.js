@@ -1,4 +1,5 @@
 import {
+  buildBlock,
   loadHeader,
   loadFooter,
   decorateIcons,
@@ -58,12 +59,32 @@ async function loadFonts() {
 }
 
 /**
+ * Builds a hero block from a leading heading and picture (auto-blocked pattern).
+ * @param {Element} main The container element
+ */
+function buildHeroBlock(main) {
+  const h1 = main.querySelector('h1');
+  const picture = main.querySelector('picture');
+  // skip when the heading already lives inside an authored block (e.g. an explicit hero)
+  if (!h1 || !picture || h1.closest('div[class]')) return;
+  // only auto-block when the picture appears before the H1 at the top of the page
+  const position = h1.compareDocumentPosition(picture);
+  const pictureBeforeH1 = position === Node.DOCUMENT_POSITION_PRECEDING
+    || position === (Node.DOCUMENT_POSITION_PRECEDING + Node.DOCUMENT_POSITION_CONTAINS);
+  if (pictureBeforeH1) {
+    const section = document.createElement('div');
+    section.append(buildBlock('hero', { elems: [picture, h1] }));
+    main.prepend(section);
+  }
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
-function buildAutoBlocks() {
+function buildAutoBlocks(main) {
   try {
-    // TODO: add auto block, if needed
+    buildHeroBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);

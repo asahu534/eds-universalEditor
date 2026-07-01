@@ -1,0 +1,46 @@
+.cta {
+  background-color: var(--color-surface-muted);
+  border-radius: var(--radius-l);
+  padding: var(--spacing-l) var(--spacing-m);
+}
+
+.cta .cta-content {
+  max-width: 760px;
+}
+
+.cta .cta-actions {
+  margin-top: var(--spacing-m);
+}
+
+.cta.centered .cta-content {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.cta.centered .cta-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.cta .cta-eyebrow {
+  margin: 0 0 var(--spacing-xs);
+  color: var(--color-accent);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--body-font-size-xs);
+}
+
+.cta .cta-body :is(h1, h2, h3, h4) {
+  margin-top: 0;
+}
+
+.cta .cta-body > :last-child {
+  margin-bottom: 0;
+}
+
+@media (width >= 900px) {
+  .cta {
+    padding: var(--spacing-xl) var(--spacing-l);
+  }
+}

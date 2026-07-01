@@ -1,0 +1,58 @@
+.testimonial .testimonial-figure {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.testimonial .testimonial-quote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m);
+  line-height: 1.4;
+  color: var(--color-on-surface);
+}
+
+.testimonial .testimonial-quote p {
+  margin: 0;
+}
+
+.testimonial .testimonial-quote::before {
+  content: "\201C";
+  display: block;
+  font-size: 3em;
+  line-height: 0.5;
+  margin-bottom: var(--spacing-s);
+  color: var(--color-accent);
+}
+
+.testimonial .testimonial-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-s);
+  margin-top: var(--spacing-m);
+}
+
+.testimonial .testimonial-photo img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonial .testimonial-meta {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.testimonial .testimonial-name {
+  font-weight: 600;
+}
+
+.testimonial .testimonial-role {
+  color: var(--color-on-surface-muted);
+  font-size: var(--body-font-size-xs);
+}

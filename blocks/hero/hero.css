@@ -5,22 +5,63 @@
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--spacing-xl) 24px;
+  min-height: 360px;
 }
 
-.hero h1 {
-  max-width: 1200px;
+.hero .hero-content {
+  max-width: var(--content-max-width);
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
+}
+
+.hero h1,
+.hero h2 {
+  margin-top: 0;
   color: var(--background-color);
+}
+
+.hero p {
+  color: var(--background-color);
+  max-width: 640px;
+}
+
+.hero .hero-eyebrow {
+  margin: 0 0 var(--spacing-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--body-font-size-xs);
+  color: var(--background-color);
+  opacity: 0.85;
+}
+
+.hero .button-wrapper {
+  margin-top: var(--spacing-m);
+}
+
+.hero .hero-bg {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  max-width: unset;
+  margin: 0;
+}
+
+.hero .hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgb(0 0 0 / 25%), rgb(0 0 0 / 55%));
 }
 
 .hero picture {
   position: absolute;
-  z-index: -1;
   inset: 0;
-  object-fit: cover;
   box-sizing: border-box;
 }
 
@@ -32,6 +73,6 @@
 
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    padding: var(--spacing-xxl) 32px;
   }
 }
