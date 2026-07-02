@@ -26,10 +26,10 @@
           "description": "The label shown for this section in the Content Tree"
         },
         {
-          "component": "select",
+          "component": "multiselect",
           "name": "style",
-          "label": "Theme",
-          "description": "Light or dark background for this section",
+          "label": "Style",
+          "description": "Background theme and content alignment for this section",
           "options": [
             {
               "name": "Light",
@@ -42,6 +42,10 @@
             {
               "name": "Highlight",
               "value": "highlight"
+            },
+            {
+              "name": "Centered",
+              "value": "centered"
             }
           ]
         }
