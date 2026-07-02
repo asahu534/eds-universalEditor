@@ -14,35 +14,9 @@
           }
         }
       }
-    },
-    {
-      "title": "Column",
-      "id": "column",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/columns/v1/columns/column",
-            "template": {
-              "model": "column"
-            }
-          }
-        }
-      }
     }
   ],
   "models": [
-    {
-      "id": "column",
-      "fields": [
-        {
-          "component": "richtext",
-          "name": "text",
-          "label": "Content",
-          "valueType": "string",
-          "value": ""
-        }
-      ]
-    },
     {
       "id": "columns",
       "fields": [
