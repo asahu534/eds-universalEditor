@@ -364,6 +364,17 @@ main .section.highlight {
   padding: var(--spacing-l) 0;
 }
 
+/* centered content alignment (author-selected per section) */
+main .section.centered {
+  text-align: center;
+}
+
+main .section.centered .button-container,
+main .section.centered .button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 /* theme: explicit light section (overrides a dark default if ever set) */
 main .section.theme-light {
   --color-surface: #fff;
