@@ -145,6 +145,20 @@
           }
         },
         {
+          "title": "Column",
+          "id": "column",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/columns/v1/columns/column",
+                "template": {
+                  "model": "column"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "CTA",
           "id": "cta",
           "plugins": {
