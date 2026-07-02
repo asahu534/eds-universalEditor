@@ -1,0 +1,52 @@
+.embed {
+  position: relative;
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+.embed .embed-facade,
+.embed iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--radius-m);
+  display: block;
+}
+
+.embed .embed-facade {
+  padding: 0;
+  cursor: pointer;
+  background-color: #000;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.embed .embed-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: rgb(0 0 0 / 70%);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.embed .embed-play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 12px 0 12px 20px;
+  border-color: transparent transparent transparent #fff;
+}
+
+.embed .embed-facade:hover .embed-play,
+.embed .embed-facade:focus-visible .embed-play {
+  background-color: var(--color-accent);
+  transform: translate(-50%, -50%) scale(1.08);
+}
