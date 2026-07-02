@@ -170,6 +170,18 @@
     ]
   },
   {
+    "id": "column",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "text",
+        "label": "Content",
+        "valueType": "string",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {
