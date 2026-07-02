@@ -78,6 +78,25 @@ function buildHeroBlock(main) {
   }
 }
 
+const EMBED_URL_PATTERN = /(?:youtube\.com|youtu\.be|vimeo\.com)/i;
+
+/**
+ * Auto-blocks bare video links (YouTube/Vimeo) into embed blocks. A "bare" link
+ * is a standalone paragraph whose only child is an anchor and whose text is the
+ * URL itself (i.e. an author pasted a raw URL as plain content).
+ * @param {Element} main The container element
+ */
+function buildEmbedBlocks(main) {
+  main.querySelectorAll('p > a[href]:only-child').forEach((a) => {
+    const p = a.parentElement;
+    // skip if already inside an authored block, or the link is styled/labelled text
+    if (p.closest('div[class]') || a.textContent.trim() !== a.href) return;
+    if (!EMBED_URL_PATTERN.test(a.href)) return;
+    const block = buildBlock('embed', { elems: [a.cloneNode(true)] });
+    p.replaceWith(block);
+  });
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -85,6 +104,7 @@ function buildHeroBlock(main) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
+    buildEmbedBlocks(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
