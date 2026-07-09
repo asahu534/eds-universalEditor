@@ -68,6 +68,7 @@
         "testimonial",
         "stats",
         "comments",
+        "pagelist",
         "fragment"
       ]
     }
