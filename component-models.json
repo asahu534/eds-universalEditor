@@ -380,6 +380,43 @@
     ]
   },
   {
+    "id": "pagelist",
+    "fields": [
+      {
+        "component": "text",
+        "name": "pathPrefix",
+        "label": "Path Prefix",
+        "description": "List published pages whose path starts with this (e.g. /campaigns/)",
+        "valueType": "string",
+        "value": "/"
+      },
+      {
+        "component": "select",
+        "name": "sort",
+        "label": "Sort By",
+        "valueType": "string",
+        "value": "newest",
+        "options": [
+          {
+            "name": "Newest first",
+            "value": "newest"
+          },
+          {
+            "name": "Title (A–Z)",
+            "value": "title"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "limit",
+        "label": "Maximum items",
+        "valueType": "number",
+        "value": "6"
+      }
+    ]
+  },
+  {
     "id": "stat",
     "fields": [
       {
