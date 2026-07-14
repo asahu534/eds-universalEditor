@@ -193,6 +193,15 @@ button {
   font: inherit;
 }
 
+input:focus, input:focus-visible, button:focus, button:focus-visible {
+  outline: none;
+  border: 2px solid var(--color-accent) !important;
+}
+input.error:focus, input.error:focus-visible, button.error:focus, button.error:focus-visible {
+  outline: none;
+  border: 2px solid #d32f2f !important;
+}
+
 /* links */
 a:any-link {
   color: var(--link-color);
@@ -200,9 +209,27 @@ a:any-link {
   overflow-wrap: break-word;
 }
 
+a {
+  position: relative;
+}
+
 a:hover {
-  color: var(--link-hover-color);
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background: var(--link-color);
+    transition: width .3s ease;
+}
+
+a:hover::after {
+    width: 100%;
 }
 
 /* buttons */

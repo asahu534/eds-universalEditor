@@ -33,7 +33,7 @@ function closeOnFocusLost(e) {
       toggleAllNavSections(navSections, false);
     } else if (!isDesktop.matches) {
       // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, navSections, false);
+      // toggleMenu(nav, navSections, false);
     }
   }
 }
@@ -122,9 +122,11 @@ export default async function decorate(block) {
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
-  while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
+  while (fragment.firstElementChild) { 
+    nav.append(fragment.firstElementChild); 
+  }
 
-  const classes = ['brand', 'sections', 'tools'];
+  const classes = ['brand', 'sections', 'search'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
@@ -140,7 +142,10 @@ export default async function decorate(block) {
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+      if (navSection.querySelector('ul')) { 
+        navSection.classList.add('nav-drop');
+      }
+      
       navSection.addEventListener('click', () => {
         if (isDesktop.matches) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';

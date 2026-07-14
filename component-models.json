@@ -306,7 +306,7 @@
         "name": "placeholder",
         "label": "Placeholder",
         "valueType": "string",
-        "value": "Search..."
+        "value": "Search Here..."
       }
     ]
   },

@@ -15,7 +15,7 @@
   color: var(--text-color);
 }
 
-.footer .footer-container a:hover {
+/* .footer .footer-container a:hover {
     text-decoration: none;
 }
 
@@ -32,7 +32,7 @@
 
 .footer .footer-container a:hover::after {
     width: 100%;
-}
+} */
 
 .footer .footer-container .footer-nav {
   padding-bottom: 24px;
