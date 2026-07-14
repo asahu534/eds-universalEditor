@@ -14,7 +14,7 @@
   min-height: 82vh;
   overflow: hidden;
   padding: 0;
-  color: #fff;
+  color: var(--color-surface);
 }
 
 /* -------------------------------------------------------
@@ -49,11 +49,11 @@
   background:
     linear-gradient(
       90deg,
-      rgba(7, 13, 25, 0.96) 0%,
-      rgba(7, 13, 25, 0.90) 28%,
-      rgba(7, 13, 25, 0.65) 55%,
-      rgba(7, 13, 25, 0.30) 80%,
-      rgba(7, 13, 25, 0.10) 100%
+      rgb(7 13 25 / 96%) 0%,
+      rgb(7 13 25 / 90%) 28%,
+      rgb(7 13 25 / 65%) 55%,
+      rgb(7 13 25 / 30%) 80%,
+      rgb(7 13 25 / 10%) 100%
     );
 }
 
@@ -81,7 +81,7 @@
   letter-spacing: 2px;
   font-size: 13px;
   font-weight: 700;
-  color: #64b5ff;
+  color: var(--link-color-secondary);
 }
 
 /* -------------------------------------------------------
@@ -93,7 +93,7 @@
   font-size: clamp(2.8rem, 5vw, 4.7rem);
   line-height: 1.08;
   font-weight: 800;
-  color: #fff;
+  color: var(--color-surface);
   letter-spacing: -1px;
 }
 
@@ -108,7 +108,7 @@
 .hero p {
   font-size: 1.2rem;
   line-height: 1.7;
-  color: rgba(255,255,255,.90);
+  color: rgb(255 255 255 / 90%);
   max-width: 560px;
 }
 
@@ -128,44 +128,38 @@
   border-radius: 999px;
   background: linear-gradient(
     135deg,
-    #1e6fff,
-    #34c3ff
+    var(--link-color),
+    var(--link-color-secondary)
   );
-
-  color: #fff;
+  color: var(--color-surface);
   font-weight: 700;
   font-size: 15px;
   text-decoration: none;
-  transition: all .3s ease;
-  box-shadow:
-    0 15px 35px rgba(30,111,255,.35);
+  transition: all 0.3s ease;
+  box-shadow: 0 15px 35px rgb(30 111 255 / 35%);
 }
 
 .hero .button:hover {
   transform: translateY(-4px);
-  box-shadow:
-    0 20px 45px rgba(30,111,255,.45);
+  box-shadow: 0 20px 45px rgb(30 111 255 / 45%);
 }
 
 /* -------------------------------------------------------
    Desktop Layout
 ------------------------------------------------------- */
 
-@media (min-width: 1200px) {
-
+@media (width >= 1200px) {
   .hero .hero-content {
     padding-top: 120px;
     padding-bottom: 120px;
   }
-
 }
 
 /* -------------------------------------------------------
    Tablet
 ------------------------------------------------------- */
 
-@media (max-width: 991px) {
-
+@media (width <= 991px) {
   .hero {
     min-height: 620px;
   }
@@ -180,21 +174,18 @@
    Mobile
 ------------------------------------------------------- */
 
-@media (max-width: 767px) {
-
+@media (width <= 767px) {
   .hero {
     min-height: 560px;
   }
 
   .hero .hero-bg::after {
-
     background:
       linear-gradient(
         180deg,
-        rgba(7,13,25,.80),
-        rgba(7,13,25,.92)
+        rgb(7 13 25 / 80%),
+        rgb(7 13 25 / 92%)
       );
-
   }
 
   .hero .hero-content {
@@ -209,7 +200,6 @@
   }
 
   .hero p {
-
     font-size: 1rem;
     margin-left: auto;
     margin-right: auto;
@@ -219,5 +209,4 @@
     display: flex;
     justify-content: center;
   }
-
 }

@@ -4,7 +4,7 @@
 
 .testimonial-container {
   padding: 110px 0;
-  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  background: linear-gradient(180deg, #f8fafc 0%, var(--color-surface) 100%);
 }
 
 .testimonial-wrapper {
@@ -21,7 +21,7 @@
   position: relative;
   margin: 0;
   padding: 70px 60px;
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid #e5e7eb;
   border-radius: 28px;
   text-align: center;
@@ -32,39 +32,12 @@
     background 0.35s ease;
 }
 
-/* Premium border */
-
-.testimonial-figure::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 1px;
-  border-radius: 28px;
-  background: linear-gradient(
-    135deg,
-    transparent,
-    transparent,
-    #1473e6,
-    #42c2ff
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: 0.35s;
-  pointer-events: none;
-}
-
 .testimonial-figure:hover {
-  border-color: #dbeafe;
-  background: #fcfdff;
-  box-shadow: 0 18px 45px rgb(20 115 230 / 8%);
-}
-
-.testimonial-figure:hover::before {
-  opacity: 1;
+  box-shadow:
+    0 12px 30px rgb(15 23 42 / 8%),
+    0 24px 50px rgb(20 115 230 / 10%);
+  border-color: var(--link-color-secondary);
+  background: rgb(255 255 255 / 8%);
 }
 
 /* ==========================================
@@ -75,7 +48,7 @@
   content: "❝";
   display: block;
   margin-bottom: 24px;
-  color: #1473e6;
+  color: var(--link-color);
   font-size: 5rem;
   line-height: 1;
   opacity: 0.18;
@@ -91,7 +64,7 @@
 
 .testimonial-quote p {
   margin: 0;
-  color: #1f2937;
+  color: var(--text-color);
   font-size: 2rem;
   font-weight: 500;
   line-height: 1.6;
@@ -137,7 +110,7 @@
    RESPONSIVE
 ========================================== */
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .testimonial-container {
     padding: 80px 0;
   }
