@@ -68,7 +68,7 @@ export default async function decorate(block) {
   footer.classList.add('footer-container');
 
   const footerNav = document.createElement('div');
-  footerNav.classList.add('footer-nav')
+  footerNav.classList.add('footer-nav');
 
   const footerCopyright = document.createElement('div');
   footerCopyright.classList.add('footer-copyright');
