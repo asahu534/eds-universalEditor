@@ -70,7 +70,8 @@
         "comments",
         "pagelist",
         "fragment",
-        "how-it-works"
+        "how-it-works",
+        "blockDef"
       ]
     }
   ]

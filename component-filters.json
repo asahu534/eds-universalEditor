@@ -16,13 +16,14 @@
       "cards",
       "columns",
       "cta",
-      "search",
       "features",
       "testimonial",
       "stats",
       "comments",
       "pagelist",
-      "fragment"
+      "fragment",
+      "how-it-works",
+      "blockDef"
     ]
   },
   {
