@@ -1,20 +1,68 @@
+/* ==========================================
+   CTA SECTION
+========================================== */
+
+.cta-container {
+  padding: 110px 24px;
+  background: linear-gradient(135deg, #07111f 0%, #132238 100%);
+}
+
+.cta-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .cta {
-  background-color: var(--color-surface-muted);
-  border-radius: var(--radius-l);
-  padding: var(--spacing-l) var(--spacing-m);
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 28px;
+  padding: 70px 50px;
+  transition: all 0.35s ease;
 }
 
-.cta .cta-content {
-  max-width: 760px;
-}
-
-.cta .cta-actions {
-  margin-top: var(--spacing-m);
+.cta:hover {
+  border-color: rgb(66 194 255 / 25%);
+  box-shadow: 0 18px 45px rgb(0 0 0 / 20%);
 }
 
 .cta.centered .cta-content {
-  margin-inline: auto;
+  max-width: 760px;
+  margin: 0 auto;
   text-align: center;
+}
+
+/* ==========================================
+   Eyebrow
+========================================== */
+
+.cta .cta-eyebrow {
+  margin: 0 0 18px;
+  color: #42c2ff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* ==========================================
+   Heading
+========================================== */
+
+.cta .cta-body h3 {
+  margin: 0;
+  color: var(--heading-font-family);
+  font-size: clamp(2.3rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+/* ==========================================
+   Button
+========================================== */
+
+.cta .cta-actions {
+  margin-top: 36px;
 }
 
 .cta.centered .cta-actions {
@@ -22,25 +70,41 @@
   justify-content: center;
 }
 
-.cta .cta-eyebrow {
-  margin: 0 0 var(--spacing-xs);
-  color: var(--color-accent);
+/* Same style as Hero Button */
+
+.cta .button {
+  display: inline-block;
+  padding: 16px 36px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #1473e6, #42c2ff);
+  color: var(--color-surface);
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-size: var(--body-font-size-xs);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgb(20 115 230 / 30%);
 }
 
-.cta .cta-body :is(h1, h2, h3, h4) {
-  margin-top: 0;
+.cta .button:hover {
+  background: linear-gradient(135deg, #0d66d0, #2fa8ff);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgb(20 115 230 / 40%);
 }
 
-.cta .cta-body > :last-child {
-  margin-bottom: 0;
-}
+/* ==========================================
+   Responsive
+========================================== */
 
-@media (width >= 900px) {
+@media (width <= 768px) {
+  .cta-container {
+    padding: 80px 20px;
+  }
+
   .cta {
-    padding: var(--spacing-xl) var(--spacing-l);
+    padding: 50px 28px;
+    border-radius: 22px;
+  }
+
+  .cta .cta-body h3 {
+    font-size: 2.2rem;
   }
 }
