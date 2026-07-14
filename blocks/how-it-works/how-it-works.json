@@ -9,22 +9,7 @@
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
               "name": "How It Works",
-              "filter": "how-it-works"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Step",
-      "id": "step",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "Step",
-              "model": "step"
+              "model": "how-it-works"
             }
           }
         }
@@ -33,41 +18,60 @@
   ],
   "models": [
     {
-      "id": "step",
+      "id": "how-it-works",
       "fields": [
         {
           "component": "text",
-          "name": "number",
-          "label": "Step Number",
-          "valueType": "string"
-        },
-        {
-          "component": "reference",
-          "name": "icon",
-          "label": "Icon",
-          "valueType": "string"
+          "name": "eyebrow",
+          "label": "Eyebrow",
+          "valueType": "string",
+          "value": "HOW IT WORKS"
         },
         {
           "component": "text",
-          "name": "title",
-          "label": "Title",
-          "valueType": "string"
+          "name": "heading",
+          "label": "Heading",
+          "valueType": "string",
+          "value": "How It Works"
         },
         {
-          "component": "richtext",
+          "component": "textarea",
           "name": "description",
           "label": "Description",
-          "valueType": "string"
+          "valueType": "string",
+          "value": "Follow these simple steps to get started."
+        },
+        {
+          "component": "multifield",
+          "name": "steps",
+          "label": "Steps",
+          "valueType": "object",
+          "fields": [
+            {
+              "component": "text",
+              "name": "number",
+              "label": "Step Number"
+            },
+            {
+              "component": "reference",
+              "name": "icon",
+              "label": "Icon",
+              "multi": false
+            },
+            {
+              "component": "text",
+              "name": "title",
+              "label": "Title"
+            },
+            {
+              "component": "textarea",
+              "name": "text",
+              "label": "Description"
+            }
+          ]
         }
       ]
     }
   ],
-  "filters": [
-    {
-      "id": "how-it-works",
-      "components": [
-        "step"
-      ]
-    }
-  ]
+  "filters": []
 }
