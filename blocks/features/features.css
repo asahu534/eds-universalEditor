@@ -1,57 +1,167 @@
-.features .features-list {
+/* ==========================================
+   FEATURES SECTION
+========================================== */
+
+.features-container {
+  padding: 50px 0;
+  background: var(--light-color);
+}
+
+.features-container .default-content-wrapper {
+  max-width: 760px;
+  margin: 0 auto 70px;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.features-container .features-item-body h1,
+.features-container .features-item-body h2 {
+  margin: 0 0 16px;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.features-container .default-content-wrapper h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text-color);
+  letter-spacing: -1px;
+}
+
+.features-wrapper {
+  max-width: 1280px;
+  margin: auto;
+  padding: 0 24px;
+}
+
+.features-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-xl) var(--spacing-l);
 }
 
-.features .features-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* ==========================================
+   CARD
+========================================== */
+
+.features-item {
+  background: var(--color-surface);
+  border-radius: 24px;
+  padding: 48px 36px;
   text-align: center;
-  gap: var(--spacing-s);
+  border: 1px solid var(--light-color);
+  transition: all 0.35s ease;
+  box-shadow: 0 12px 30px rgb(15 23 42 / 5%);
+  position: relative;
+  overflow: hidden;
 }
 
-.features .features-item-icon {
-  line-height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 72px;
-  height: 72px;
+.features-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(
+    90deg,
+    var(--link-color),
+    var(--link-color-secondary)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: 0.35s;
+}
+
+/* ==========================================
+   ICON
+========================================== */
+
+.features-item-icon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 28px;
   border-radius: 50%;
-  background-color: var(--color-surface-muted);
+  background: linear-gradient(
+    135deg,
+    var(--link-color),
+    var(--link-color-secondary)
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.45s;
 }
 
-.features .features-item-icon img {
-  width: 40px;
-  height: 40px;
+.features-item-icon img {
+  width: 42px;
+  height: 42px;
   object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: 0.45s;
 }
 
-.features .features-item-body :is(h1, h2, h3, h4, h5, h6) {
-  margin-top: 0;
-  margin-bottom: var(--spacing-xs);
-  font-size: var(--heading-font-size-s);
+.features-item:hover {
+  border-color: var(--link-color);
+  box-shadow: 0 18px 40px rgb(20 115 230 / 8%);
 }
 
-.features .features-item-body p {
+.features-item:hover .features-item-icon {
+  transform: rotateY(180deg);
+  background: var(--link-color);
+}
+
+.features-item:hover img {
+  transform: scale(0.9);
+  filter: brightness(0) invert(1);
+}
+
+/* ==========================================
+   CONTENT
+========================================== */
+
+.features-item-body p {
   margin: 0;
-  color: var(--color-on-surface-muted);
-  max-width: 32ch;
+  color: var(--dark-color);
+  line-height: 1.8;
+  font-size: 1rem;
 }
 
-@media (width >= 600px) {
-  .features .features-list {
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (width <= 991px) {
+  .features-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (width >= 900px) {
-  .features .features-list {
-    grid-template-columns: repeat(3, 1fr);
+@media (width <= 767px) {
+  .features-container {
+    padding: 70px 0;
+  }
+
+  .features-list {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .features-container .default-content-wrapper {
+    margin-bottom: 50px;
+  }
+
+  .features-item {
+    padding: 40px 28px;
+  }
+
+  .features-container .default-content-wrapper h2 {
+    font-size: 2.2rem;
   }
 }

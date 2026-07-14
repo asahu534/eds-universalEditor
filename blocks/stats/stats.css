@@ -1,36 +1,186 @@
-.stats .stats-list {
+/* ==========================================
+   STATS SECTION
+========================================== */
+
+.stats-container {
+  padding: 110px 0;
+  background:
+    radial-gradient(circle at top right, rgb(20 115 230 / 20%), transparent 35%),
+    radial-gradient(circle at bottom left, rgb(66 194 255 / 12%), transparent 35%),
+    linear-gradient(135deg, #07111f, #101827, #18263f);
+  color: var(--color-surface);
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-container::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 4%);
+  top: -120px;
+  right: -80px;
+}
+
+.stats-container::after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: rgb(20 115 230 / 12%);
+  bottom: -120px;
+  left: -100px;
+}
+
+.stats-container .default-content-wrapper {
+  max-width: 760px;
+  margin: auto;
+  text-align: center;
+  padding: 0 24px;
+  margin-bottom: 70px;
+  position: relative;
+  z-index: 2;
+}
+
+.stats-container h3 {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  color: var(--heading-font-family);
+}
+
+/* ==========================================
+   GRID
+========================================== */
+
+.stats-wrapper {
+  max-width: 1280px;
+  margin: auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.stats-list {
   list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-l) var(--spacing-m);
   text-align: center;
 }
 
-.stats .stats-item {
+/* ==========================================
+   CARD
+========================================== */
+
+.stats-item {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
+  padding: 48px 28px;
+  border-radius: 24px;
+  background: rgb(255 255 255 / 6%);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgb(255 255 255 / 10%);
+  text-align: center;
+  transition: 0.35s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.stats .stats-value {
+.stats-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--link-color), var(--link-color-secondary));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: 0.35s;
+}
+
+.stats-item:hover {
+  border-color: var(--link-color-secondary);
+  background: rgb(255 255 255 / 8%);
+}
+
+.stats-value {
+  display: block;
   font-family: var(--heading-font-family);
-  font-size: var(--heading-font-size-xl);
-  font-weight: 700;
+  font-size: 3.8rem;
+  font-weight: 800;
   line-height: 1;
-  color: var(--color-accent);
+  margin-bottom: 18px;
+  background: linear-gradient(135deg, var(--color-surface), var(--link-color-secondary));
+  background-clip: text;
+  color: transparent;
+  transition: transform 0.35s ease, text-shadow 0.35s ease;
 }
 
-.stats .stats-label {
-  color: var(--color-on-surface-muted);
-  font-size: var(--body-font-size-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+.stats-item:hover .stats-value {
+  transform: scale(1.08);
+  text-shadow: 0 0 25px rgb(66 194 255 / 45%);
+  color: var(--link-color-secondary);
 }
 
-@media (width >= 900px) {
-  .stats .stats-list {
-    grid-template-columns: repeat(4, 1fr);
+/* ==========================================
+   LABEL
+========================================== */
+
+.stats-label {
+  display: block;
+  color: rgb(255 255 255 / 80%);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (width <= 991px) {
+  .stats-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width <= 767px) {
+  .stats-container {
+    padding: 80px 0;
+  }
+
+  .stats-wrapper {
+    padding: 0 18px;
+  }
+
+  .stats-container .default-content-wrapper {
+    margin-bottom: 50px;
+  }
+
+  .stats-list {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .stats-item {
+    padding: 40px 24px;
+  }
+
+  .stats-value {
+    font-size: 3rem;
+  }
+
+  .stats-container h3 {
+    font-size: 2.2rem;
   }
 }

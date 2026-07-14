@@ -1,3 +1,14 @@
+@media (width >= 900px) {
+  header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background: var(--background-color);
+  }
+}
+
 /* header and nav layout */
 header .nav-wrapper {
   background-color: var(--background-color);
