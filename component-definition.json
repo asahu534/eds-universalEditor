@@ -55,8 +55,8 @@
               }
             }
           }
-        },
-        {
+          },
+          {
           "title": "Quote",
           "id": "quote",
           "plugins": {

@@ -61,14 +61,13 @@
   letter-spacing: -1px;
 }
 
-.columns h1::before {
-  content: "UNIVERSAL EDITOR";
-  display: block;
-  margin-bottom: 20px;
+.columns p{
   color: #1473e6;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 3px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
 .columns h1::after {
