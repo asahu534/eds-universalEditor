@@ -299,6 +299,18 @@
     ]
   },
   {
+    "id": "search",
+    "fields": [
+      {
+        "component": "text",
+        "name": "placeholder",
+        "label": "Placeholder",
+        "valueType": "string",
+        "value": "Search..."
+      }
+    ]
+  },
+  {
     "id": "feature",
     "fields": [
       {
@@ -471,6 +483,25 @@
         "name": "role",
         "label": "Author Role",
         "valueType": "string",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "quote",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "quote",
+        "value": "",
+        "label": "Quote",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "author",
+        "label": "Author",
         "value": ""
       }
     ]
