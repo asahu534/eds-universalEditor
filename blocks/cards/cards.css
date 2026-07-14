@@ -33,204 +33,146 @@
 
     display: flex;
     flex-direction: column;
-
     background: #fff;
-
     border-radius: 22px;
-
     overflow: hidden;
-
     border: 1px solid #e5e7eb;
-
     transition:
         border-color .35s ease,
         box-shadow .35s ease,
         background .35s ease;
-
     position: relative;
 }
 
 /* Blue glow border */
 
-.cards li::after{
+.cards li::after {
 
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    border-radius:22px;
-
-    padding:1px;
-
-    background:linear-gradient(
-        135deg,
-        transparent,
-        transparent,
-        #1473e6,
-        #42c2ff
-    );
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    padding: 1px;
+    background: linear-gradient(135deg,
+            transparent,
+            transparent,
+            #1473e6,
+            #42c2ff);
 
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
 
-    -webkit-mask-composite:xor;
-            mask-composite:exclude;
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
 
-    opacity:0;
-
-    transition:.35s;
-
-    pointer-events:none;
+    opacity: 0;
+    transition: .35s;
+    pointer-events: none;
 }
 
-.cards li:hover{
-
-    background:#fcfdff;
-
-    border-color:#d9e7fb;
-
+.cards li:hover {
+    background: #fcfdff;
+    border-color: #d9e7fb;
     box-shadow:
-        0 18px 40px rgba(20,115,230,.08);
+        0 18px 40px rgba(20, 115, 230, .08);
 
 }
 
-.cards li:hover::after{
-
-    opacity:1;
-
+.cards li:hover::after {
+    opacity: 1;
 }
 
 /* ==========================================
    IMAGE
 ========================================== */
 
-.cards-card-image{
-
-    overflow:hidden;
-
-    background:#f4f8ff;
+.cards-card-image {
+    overflow: hidden;
+    background: #f4f8ff;
 }
 
-.cards-card-image img{
-
-    width:100%;
-
-    display:block;
-
-    transition:transform .6s ease;
+.cards-card-image img {
+    width: 100%;
+    display: block;
+    transition: transform .6s ease;
 }
 
-.cards li:hover img{
-
-    transform:scale(1.05);
+.cards li:hover img {
+    transform: scale(1.05);
 }
 
 /* ==========================================
    CONTENT
 ========================================== */
 
-.cards-card-body{
-
-    padding:30px;
+.cards-card-body {
+    padding: 30px;
 }
 
-.cards-card-body p:first-child{
-
-    margin:0 0 14px;
-
-    font-size:1.45rem;
-
-    font-weight:700;
-
-    color:#111827;
-
-    transition:.3s;
-
-    display:flex;
-
-    align-items:center;
+.cards-card-body p:first-child {
+    margin: 0 0 14px;
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #111827;
+    transition: .3s;
+    display: flex;
+    align-items: center;
 }
 
 /* Arrow */
 
-.cards-card-body p:first-child::after{
-
-    content:"→";
-
-    margin-left:12px;
-
-    opacity:0;
-
-    transform:translateX(-10px);
-
-    transition:.3s;
+.cards-card-body p:first-child::after {
+    content: "→";
+    margin-left: 12px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: .3s;
 }
 
-.cards li:hover p:first-child{
-
-    color:#1473e6;
+.cards li:hover p:first-child {
+    color: #1473e6;
 }
 
-.cards li:hover p:first-child::after{
-
-    opacity:1;
-
-    transform:translateX(0);
+.cards li:hover p:first-child::after {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-.cards-card-body p:last-child{
-
-    margin:0;
-
-    color:#6b7280;
-
-    line-height:1.8;
-
-    font-size:1rem;
-
-    transition:.3s;
+.cards-card-body p:last-child {
+    margin: 0;
+    color: #6b7280;
+    line-height: 1.8;
+    font-size: 1rem;
+    transition: .3s;
 }
 
-.cards li:hover p:last-child{
-
-    color:#374151;
+.cards li:hover p:last-child {
+    color: #374151;
 }
 
 /* ==========================================
    RESPONSIVE
 ========================================== */
 
-@media (max-width:991px){
-
-.cards ul{
-
-grid-template-columns:1fr;
-
+@media (max-width:991px) {
+    .cards ul {
+        grid-template-columns: 1fr;
+    }
 }
 
-}
+@media (max-width:768px) {
 
-@media (max-width:768px){
+    .cards-container {
+        padding: 80px 0;
+    }
 
-.cards-container{
+    .cards-wrapper {
+        padding: 0 20px;
+    }
 
-padding:80px 0;
-
-}
-
-.cards-wrapper{
-
-padding:0 20px;
-
-}
-
-.cards-card-body{
-
-padding:24px;
-
-}
+    .cards-card-body {
+        padding: 24px;
+    }
 
 }

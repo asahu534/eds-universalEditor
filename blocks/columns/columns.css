@@ -1,43 +1,3 @@
-/* .columns > div {
-  display: flex;
-  flex-direction: column;
-}
-
-.columns img {
-  width: 100%;
-}
-
-.columns > div > div {
-  order: 1;
-}
-
-.columns > div > .columns-img-col {
-  order: 0;
-}
-
-.columns > div > .columns-img-col img {
-  display: block;
-}
-
-@media (width >= 900px) {
-  .columns > div {
-    align-items: center;
-    flex-direction: unset;
-    gap: 24px;
-  }
-
-  .columns > div > div {
-    flex: 1;
-    order: unset;
-  }
-
-  .columns.wide-left > div > div:first-child,
-  .columns.wide-right > div > div:last-child {
-    flex: 2;
-  }
-} */
-
-
 /* ===============================
    Product Showcase Section
 ================================= */
@@ -53,7 +13,7 @@
   padding: 0 32px;
 }
 
-.columns > div {
+.columns>div {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   align-items: center;
@@ -64,7 +24,7 @@
    Content
 ================================= */
 
-.columns > div > div:first-child {
+.columns>div>div:first-child {
   max-width: 520px;
 }
 
@@ -147,7 +107,7 @@
   width: 450px;
   height: 450px;
   border-radius: 50%;
-  background: rgba(20,115,230,.05);
+  background: rgba(20, 115, 230, .05);
   top: -180px;
   right: -140px;
 }
@@ -158,7 +118,7 @@
   width: 280px;
   height: 280px;
   border-radius: 50%;
-  background: rgba(20,115,230,.05);
+  background: rgba(20, 115, 230, .05);
   bottom: -120px;
   left: -120px;
 }
@@ -169,13 +129,13 @@
 
 @media (max-width: 992px) {
 
-  .columns > div {
+  .columns>div {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 60px;
   }
 
-  .columns > div > div:first-child {
+  .columns>div>div:first-child {
     max-width: 700px;
     margin: auto;
   }

@@ -3,14 +3,14 @@
 ========================================== */
 
 .testimonial-container {
-    padding: 110px 0;
-    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  padding: 110px 0;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
 }
 
 .testimonial-wrapper {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 /* ==========================================
@@ -18,80 +18,53 @@
 ========================================== */
 
 .testimonial-figure {
-
-    position: relative;
-
-    margin: 0;
-
-    padding: 70px 60px;
-
-    background: #fff;
-
-    border-radius: 28px;
-
-    border: 1px solid #e5e7eb;
-
-    text-align: center;
-
-    overflow: hidden;
-
-    transition:
-        border-color .35s ease,
-        box-shadow .35s ease,
-        background .35s ease;
+  position: relative;
+  margin: 0;
+  padding: 70px 60px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 28px;
+  text-align: center;
+  overflow: hidden;
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease;
 }
 
 /* Premium border */
 
 .testimonial-figure::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    border-radius: 28px;
-
-    padding: 1px;
-
-    background: linear-gradient(
-        135deg,
-        transparent,
-        transparent,
-        #1473e6,
-        #42c2ff
-    );
-
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-
-    opacity: 0;
-
-    transition: .35s;
-
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: 28px;
+  background: linear-gradient(
+    135deg,
+    transparent,
+    transparent,
+    #1473e6,
+    #42c2ff
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: 0.35s;
+  pointer-events: none;
 }
 
 .testimonial-figure:hover {
-
-    border-color: #dbeafe;
-
-    background: #fcfdff;
-
-    box-shadow:
-        0 18px 45px rgba(20,115,230,.08);
-
+  border-color: #dbeafe;
+  background: #fcfdff;
+  box-shadow: 0 18px 45px rgb(20 115 230 / 8%);
 }
 
 .testimonial-figure:hover::before {
-
-    opacity: 1;
-
+  opacity: 1;
 }
 
 /* ==========================================
@@ -99,20 +72,13 @@
 ========================================== */
 
 .testimonial-quote::before {
-
-    content: "❝";
-
-    display: block;
-
-    font-size: 5rem;
-
-    color: #1473e6;
-
-    line-height: 1;
-
-    margin-bottom: 24px;
-
-    opacity: .18;
+  content: "❝";
+  display: block;
+  margin-bottom: 24px;
+  color: #1473e6;
+  font-size: 5rem;
+  line-height: 1;
+  opacity: 0.18;
 }
 
 /* ==========================================
@@ -120,21 +86,15 @@
 ========================================== */
 
 .testimonial-quote {
-
-    margin: 0;
+  margin: 0;
 }
 
 .testimonial-quote p {
-
-    margin: 0;
-
-    font-size: 2rem;
-
-    line-height: 1.6;
-
-    font-weight: 500;
-
-    color: #1f2937;
+  margin: 0;
+  color: #1f2937;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.6;
 }
 
 /* ==========================================
@@ -142,51 +102,35 @@
 ========================================== */
 
 .testimonial-author {
-
-    margin-top: 48px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 48px;
 }
 
 /* Photo */
 
 .testimonial-photo img {
-
-    width: 72px;
-
-    height: 72px;
-
-    border-radius: 50%;
-
-    object-fit: cover;
-
-    border: 3px solid #1473e6;
-
-    transition: .35s;
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border: 3px solid #1473e6;
+  border-radius: 50%;
+  transition: transform 0.35s ease;
 }
 
 .testimonial-figure:hover .testimonial-photo img {
-
-    transform: scale(1.08);
+  transform: scale(1.08);
 }
 
 /* Name */
 
 .testimonial-name {
-
-    display: block;
-
-    font-size: 1.1rem;
-
-    font-weight: 700;
-
-    color: #111827;
+  display: block;
+  color: #111827;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 /* ==========================================
@@ -194,30 +138,23 @@
 ========================================== */
 
 @media (max-width: 768px) {
+  .testimonial-container {
+    padding: 80px 0;
+  }
 
-    .testimonial-container {
+  .testimonial-wrapper {
+    padding: 0 20px;
+  }
 
-        padding: 80px 0;
-    }
+  .testimonial-figure {
+    padding: 50px 30px;
+  }
 
-    .testimonial-wrapper {
+  .testimonial-quote p {
+    font-size: 1.4rem;
+  }
 
-        padding: 0 20px;
-    }
-
-    .testimonial-figure {
-
-        padding: 50px 30px;
-    }
-
-    .testimonial-quote p {
-
-        font-size: 1.4rem;
-    }
-
-    .testimonial-author {
-
-        flex-direction: column;
-    }
-
+  .testimonial-author {
+    flex-direction: column;
+  }
 }
