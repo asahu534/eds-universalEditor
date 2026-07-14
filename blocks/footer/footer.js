@@ -72,7 +72,8 @@ export default async function decorate(block) {
 
   const footerCopyright = document.createElement('div');
   footerCopyright.classList.add('footer-copyright');
-
+  
+  buildColumns(footer);
   const sections = [...fragment.children];
 
   if (sections[0]) {
