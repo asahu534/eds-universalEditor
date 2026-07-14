@@ -405,11 +405,11 @@ main .section.theme-dark {
   background-color: var(--color-surface);
   color: var(--color-on-surface);
 }
-
+/* 
 main .section.theme-dark a:any-link {
   color: var(--color-accent);
 }
 
 main .section.theme-dark a:hover {
   color: var(--color-accent-hover);
-}
+} */
