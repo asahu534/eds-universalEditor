@@ -15,14 +15,16 @@
   --background-color: white;
   --light-color: #f8f8f8;
   --dark-color: #505050;
+  --dark-color-extra: #c9c9c9;
   --text-color: #131313;
   --link-color: #3b63fb;
   --link-hover-color: #1d3ecf;
+  --link-color-secondary: #42c2ff;
 
   /* brand palette */
   --color-brand: #3b63fb;
   --color-brand-hover: #1d3ecf;
-  --color-brand-contrast: #fff;
+  --color-brand-contrast: var(--color-surface);
 
   /* semantic theme tokens (light is the default) */
   --color-surface: var(--background-color);
@@ -404,7 +406,7 @@ main .section.centered .button-wrapper {
 
 /* theme: explicit light section (overrides a dark default if ever set) */
 main .section.theme-light {
-  --color-surface: #fff;
+  --color-surface: var(--color-surface);
   --color-surface-muted: #f8f8f8;
   --color-on-surface: #131313;
   --color-on-surface-muted: #5b5b5b;
@@ -433,10 +435,11 @@ main .section.theme-dark {
   color: var(--color-on-surface);
 }
 
+/* 
 main .section.theme-dark a:any-link {
   color: var(--color-accent);
 }
 
 main .section.theme-dark a:hover {
   color: var(--color-accent-hover);
-}
+} */

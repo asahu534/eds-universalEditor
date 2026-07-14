@@ -1,7 +1,45 @@
+/* ==========================================
+   EMBED SECTION
+========================================== */
+
+.embed-container {
+  padding: 50px 0;
+  background: var(--color-surface);
+}
+
+.embed-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ==========================================
+   VIDEO CARD
+========================================== */
+
 .embed {
   position: relative;
   max-width: 960px;
   margin-inline: auto;
+  overflow: hidden;
+  border-radius: 28px;
+  background: #000;
+  box-shadow: 0 20px 60px rgb(15 23 42 / 12%);
+}
+
+.embed-facade {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background-color: #000;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  transition: transform 0.5s ease;
 }
 
 .embed .embed-facade,
@@ -13,40 +51,142 @@
   display: block;
 }
 
-.embed .embed-facade {
-  padding: 0;
-  cursor: pointer;
-  background-color: #000;
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
+/* ==========================================
+   THUMBNAIL
+========================================== */
+.embed-facade::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgb(0 0 0 / 15%),
+    rgb(0 0 0 / 35%)
+  );
+  transition: 0.35s;
 }
 
-.embed .embed-play {
+.embed:hover .embed-facade {
+  transform: scale(1.03);
+}
+
+.embed:hover .embed-facade::before {
+  background: linear-gradient(
+    rgb(0 0 0 / 8%),
+    rgb(0 0 0 / 25%)
+  );
+}
+
+/* ==========================================
+   PLAY BUTTON
+========================================== */
+
+.embed-play {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 72px;
-  height: 72px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
-  background-color: rgb(0 0 0 / 70%);
+  background: #1473e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.35s ease;
+  box-shadow: 0 10px 30px rgb(20 115 230 / 35%);
+}
+
+.embed-play::before {
+  content: "";
+  border-style: solid;
+  border-width: 14px 0 14px 22px;
+  border-color: transparent transparent transparent white;
+  margin-left: 6px;
+}
+
+.embed-play::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 2px solid rgb(255 255 255 / 45%);
+  animation: pulse 2.2s infinite;
+}
+
+.embed .embed-play {
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.embed .embed-play::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 54%;
-  transform: translate(-50%, -50%);
-  border-style: solid;
-  border-width: 12px 0 12px 20px;
-  border-color: transparent transparent transparent #fff;
+.embed:hover .embed-play {
+  background: #0d66d0;
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 18px 45px rgb(20 115 230 / 45%);
 }
 
 .embed .embed-facade:hover .embed-play,
 .embed .embed-facade:focus-visible .embed-play {
   background-color: var(--color-accent);
   transform: translate(-50%, -50%) scale(1.08);
+}
+
+/* ==========================================
+   ANIMATION
+========================================== */
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+
+  70% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (width <= 992px) {
+  .embed-container {
+    padding: 80px 0;
+  }
+
+  .embed-wrapper {
+    padding: 0 24px;
+  }
+
+  .embed-play {
+    width: 82px;
+    height: 82px;
+  }
+}
+
+@media (width <= 768px) {
+  .embed-container {
+    padding: 70px 0;
+  }
+
+  .embed-wrapper {
+    padding: 0 18px;
+  }
+
+  .embed {
+    border-radius: 20px;
+  }
+
+  .embed-play {
+    width: 72px;
+    height: 72px;
+  }
+
+  .embed-play::before {
+    border-width: 12px 0 12px 18px;
+  }
 }
