@@ -15,6 +15,12 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-m);
   background-color: var(--color-surface);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.comments .comments-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgb(230 230 230 / 20%);
 }
 
 .comments .comments-name {
@@ -26,6 +32,7 @@
   font-size: var(--body-font-size-xs);
   color: var(--color-accent);
   word-break: break-all;
+  display: inline-block;
 }
 
 .comments .comments-body {
