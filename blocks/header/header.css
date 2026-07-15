@@ -160,10 +160,6 @@ header nav[aria-expanded='true'] .nav-search {
     visibility: visible;
 }
 
-@media (width >= 900px) {
-
-}
-
 /* brand */
 header .nav-brand {
   grid-area: brand;
@@ -220,10 +216,12 @@ header nav .nav-sections ul > li > ul {
       display: block;
       visibility: visible;
   }
+
   header nav .nav-sections .default-content-wrapper {
     display: flex;
     flex-direction: row-reverse;
   }
+
   header nav .nav-sections {
     display: flex;
     flex-direction: row-reverse;
@@ -281,7 +279,7 @@ header nav .nav-sections ul > li > ul {
     padding: 16px;
     background-color: var(--light-color);
     white-space: initial;
-    box-shadow: 0 6px 38px rgb(0 0 0 / 0.4);
+    box-shadow: 0 6px 38px rgb(0 0 0 / 40%);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul::before {

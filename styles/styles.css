@@ -199,24 +199,25 @@ input:focus, input:focus-visible, button:focus, button:focus-visible {
   outline: none;
   border: 2px solid var(--color-accent) !important;
 }
+
 input.error:focus, input.error:focus-visible, button.error:focus, button.error:focus-visible {
   outline: none;
   border: 2px solid #d32f2f !important;
 }
 
 /* links */
-a:any-link {
-  color: var(--link-color);
-  text-decoration: none;
-  overflow-wrap: break-word;
-}
-
 a {
   position: relative;
 }
 
 a:hover {
   text-decoration: none;
+}
+
+a:any-link {
+  color: var(--link-color);
+  text-decoration: none;
+  overflow-wrap: break-word;
 }
 
 a::after {
