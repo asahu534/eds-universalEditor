@@ -336,18 +336,6 @@
     ]
   },
   {
-    "id": "search",
-    "fields": [
-      {
-        "component": "text",
-        "name": "placeholder",
-        "label": "Placeholder",
-        "valueType": "string",
-        "value": "Search Here..."
-      }
-    ]
-  },
-  {
     "id": "feature",
     "fields": [
       {
@@ -466,25 +454,6 @@
     ]
   },
   {
-    "id": "stat",
-    "fields": [
-      {
-        "component": "text",
-        "name": "value",
-        "label": "Value",
-        "valueType": "string",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "name": "label",
-        "label": "Label",
-        "valueType": "string",
-        "value": ""
-      }
-    ]
-  },
-  {
     "id": "quote",
     "fields": [
       {
@@ -499,6 +468,25 @@
         "valueType": "string",
         "name": "author",
         "label": "Author",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "stat",
+    "fields": [
+      {
+        "component": "text",
+        "name": "value",
+        "label": "Value",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "label",
+        "label": "Label",
+        "valueType": "string",
         "value": ""
       }
     ]

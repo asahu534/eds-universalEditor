@@ -14,7 +14,6 @@
       "title",
       "hero",
       "cards",
-      "search",
       "columns",
       "cta",
       "features",
@@ -23,8 +22,8 @@
       "comments",
       "pagelist",
       "fragment",
-      "quote",
-      "blockDef"
+      "how-it-works",
+      "quote"
     ]
   },
   {
