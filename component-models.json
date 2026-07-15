@@ -155,46 +155,6 @@
     ]
   },
   {
-    "id": "block-feature",
-    "fields": [
-      {
-        "component": "richtext",
-        "name": "quote",
-        "label": "Quote",
-        "valueType": "string",
-        "value": ""
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "photo",
-        "label": "Author Photo",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "photoAlt",
-        "label": "Photo Alt Text",
-        "valueType": "string",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "name": "author",
-        "label": "Author Name",
-        "valueType": "string",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "name": "role",
-        "label": "Author Role",
-        "valueType": "string",
-        "value": ""
-      }
-    ]
-  },
-  {
     "id": "card",
     "fields": [
       {
