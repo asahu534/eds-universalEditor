@@ -20,7 +20,7 @@
 
 .comments .comments-item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(234, 230, 230, 0.25);
+  box-shadow: 0 8px 28px rgb(230 230 230 / 20%);
 }
 
 .comments .comments-name {
