@@ -33,42 +33,6 @@
           "label": "Heading",
           "valueType": "string",
           "value": "How It Works"
-        },
-        {
-          "component": "textarea",
-          "name": "description",
-          "label": "Description",
-          "valueType": "string",
-          "value": "Follow these simple steps to get started."
-        },
-        {
-          "component": "multifield",
-          "name": "steps",
-          "label": "Steps",
-          "valueType": "object",
-          "fields": [
-            {
-              "component": "text",
-              "name": "number",
-              "label": "Step Number"
-            },
-            {
-              "component": "reference",
-              "name": "icon",
-              "label": "Icon",
-              "multi": false
-            },
-            {
-              "component": "text",
-              "name": "title",
-              "label": "Title"
-            },
-            {
-              "component": "textarea",
-              "name": "text",
-              "label": "Description"
-            }
-          ]
         }
       ]
     }
