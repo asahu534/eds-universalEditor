@@ -273,7 +273,6 @@ header nav .nav-sections ul > li > ul {
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-  /* header nav .nav-sections .default-content-wrapper > ul > li > ul { */
     display: block;
     position: absolute;
     left: 0;
