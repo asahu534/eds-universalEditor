@@ -155,43 +155,6 @@
     ]
   },
   {
-    "id": "blockDef",
-    "fields": [
-      {
-        "component": "text",
-        "name": "endpoint",
-        "label": "API Endpoint",
-        "description": "Public REST API returning a JSON array (CORS-enabled)",
-        "valueType": "string",
-        "value": "https://jsonplaceholder.typicode.com/comments"
-      },
-      {
-        "component": "text",
-        "name": "limit",
-        "label": "Number of items",
-        "valueType": "number",
-        "value": "6"
-      },
-      {
-        "component": "select",
-        "name": "classes",
-        "label": "Layout",
-        "valueType": "string",
-        "value": "",
-        "options": [
-          {
-            "name": "Grid",
-            "value": ""
-          },
-          {
-            "name": "List",
-            "value": "list"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "card",
     "fields": [
       {
