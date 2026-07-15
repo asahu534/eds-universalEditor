@@ -15,25 +15,6 @@
   color: var(--text-color);
 }
 
-.footer .footer-container a:hover {
-    text-decoration: none;
-}
-
-.footer .footer-container a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    width: 0;
-    height: 2px;
-    background: var(--link-color);
-    transition: width .3s ease;
-}
-
-.footer .footer-container a:hover::after {
-    width: 100%;
-}
-
 .footer .footer-container .footer-nav {
   padding-bottom: 24px;
   border-bottom: 1px solid #000;

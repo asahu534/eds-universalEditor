@@ -336,6 +336,18 @@
     ]
   },
   {
+    "id": "search",
+    "fields": [
+      {
+        "component": "text",
+        "name": "placeholder",
+        "label": "Placeholder",
+        "valueType": "string",
+        "value": "Search Here..."
+      }
+    ]
+  },
+  {
     "id": "feature",
     "fields": [
       {
