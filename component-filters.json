@@ -23,7 +23,8 @@
       "pagelist",
       "fragment",
       "how-it-works",
-      "quote"
+      "quote",
+      "faq"
     ]
   },
   {
@@ -45,6 +46,12 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "faq",
+    "components": [
+      "faqItem"
     ]
   },
   {
