@@ -299,6 +299,18 @@
     ]
   },
   {
+    "id": "faq",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "faqItem",
     "fields": [
       {
@@ -313,18 +325,6 @@
         "valueType": "string",
         "name": "body",
         "label": "Body",
-        "value": ""
-      }
-    ]
-  },
-  {
-    "id": "faq",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "heading",
-        "label": "Heading",
         "value": ""
       }
     ]
