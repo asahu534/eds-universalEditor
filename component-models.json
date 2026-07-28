@@ -321,6 +321,13 @@
         "value": ""
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "answer",
+        "label": "Answer",
+        "value": ""
+      },
+      {
         "component": "richtext",
         "valueType": "string",
         "name": "body",
