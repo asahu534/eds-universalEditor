@@ -1,0 +1,97 @@
+{
+  "definitions": [
+    {
+      "title": "Carousel",
+      "id": "carousel",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Carousel",
+              "model": "carousel",
+              "filter": "carousel"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Carousel Item",
+      "id": "carousel-item",
+        "plugins": {
+            "xwalk": {
+            "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                "name": "Carousel Item",
+                "model": "carousel-item"
+                }
+            }
+            }
+        }
+    }
+  ],
+  "models": [
+{
+      "id": "carousel",
+      "fields": [
+       {
+          "component": "boolean",
+           "label": "Autoplay",
+            "name": "autoplay",
+            "valueType": "boolean"
+        },
+        {
+          "component": "number",
+          "name": "autoplayDelay",
+          "label": "Autoplay Delay",
+          "valueType": "number"
+        },
+        {
+          "component": "number",
+          "name": "showNavigation",
+          "label": "Show Navigation Arrows",
+          "valueType": "boolean"
+        },
+         {
+          "component": "boolean",
+          "name": "showPagination",
+          "label": "Show Pagination Dots",
+          "valueType": "boolean"
+        },
+        {
+          "component": "boolean",
+          "name": "loop",
+          "label": "Loop",
+          "valueType": "boolean"
+        }
+      ]
+    },
+    {
+      "id": "carousel-item",
+      "fields": [
+       {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": true
+        },
+        {
+          "component": "richtext",
+          "name": "description",
+          "label": "Description",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  
+  "filters": [
+    {
+      "id": "carousel",
+      "components": ["carousel-item"]
+    }
+  ]
+}
