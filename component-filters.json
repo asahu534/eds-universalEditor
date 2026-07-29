@@ -24,7 +24,7 @@
       "fragment",
       "how-it-works",
       "quote",
-      "faq"
+      "accordion"
     ]
   },
   {
@@ -49,9 +49,9 @@
     ]
   },
   {
-    "id": "faq",
+    "id": "accordion",
     "components": [
-      "faqItem"
+      "accordionItem"
     ]
   },
   {

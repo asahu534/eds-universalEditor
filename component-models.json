@@ -299,18 +299,7 @@
     ]
   },
   {
-    "id": "faq",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "heading",
-        "label": "Heading"
-      }
-    ]
-  },
-  {
-    "id": "faqItem",
+    "id": "accordionItem",
     "fields": [
       {
         "component": "text",

@@ -1,31 +1,31 @@
 {
   "definitions": [
     {
-      "title": "FAQ",
-      "id": "faq",
+      "title": "Accordion",
+      "id": "accordion",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
-              "name": "FAQ",
-              "model": "faq",
-              "filter": "faq"
+              "name": "Accordion",
+              "model": "accordion",
+              "filter": "accordion"
             }
           }
         }
       }
     },
     {
-      "title": "FAQ Item",
-      "id": "faqItem",
+      "title": "Accordion Item",
+      "id": "accordionItem",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "name": "FAQ Item",
-              "model": "faqItem"
+              "name": "Accordion Item",
+              "model": "accordionItem"
             }
           }
         }
@@ -34,18 +34,7 @@
   ],
   "models": [
     {
-      "id": "faq",
-      "fields": [
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "heading",
-          "label": "Heading"
-        }
-      ]
-    },
-    {
-      "id": "faqItem",
+      "id": "accordionItem",
       "fields": [
         {
           "component": "text",
@@ -66,8 +55,8 @@
   ],
   "filters": [
     {
-      "id": "faq",
-      "components": ["faqItem"]
+      "id": "accordion",
+      "components": ["accordionItem"]
     }
   ]
 }
