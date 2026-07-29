@@ -28,6 +28,12 @@
     ]
   },
   {
+    "id": "accordion",
+    "components": [
+      "accordionItem"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
@@ -46,12 +52,6 @@
       "image",
       "button",
       "title"
-    ]
-  },
-  {
-    "id": "accordion",
-    "components": [
-      "accordionItem"
     ]
   },
   {
