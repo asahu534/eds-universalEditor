@@ -1,0 +1,33 @@
+
+.accordion-content{
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.accordion-title{
+    display: flex;
+    padding: 12px 0;
+    align-items: center;
+    justify-content: space-between;
+    color: #404040;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.accordion-icon{
+    width: 16px;
+    height: 16px;
+}
+
+.accordion-body{
+    display: none;
+    padding: 12px 0;
+    color: #404040;
+    font-size: 14px;
+    line-height: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.accordion-body p{
+    margin: 0;
+}

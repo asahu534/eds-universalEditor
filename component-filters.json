@@ -23,7 +23,14 @@
       "pagelist",
       "fragment",
       "how-it-works",
-      "quote"
+      "quote",
+      "accordion"
+    ]
+  },
+  {
+    "id": "accordion",
+    "components": [
+      "accordionItem"
     ]
   },
   {
