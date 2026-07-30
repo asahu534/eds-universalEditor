@@ -13,6 +13,14 @@ export default async function decorate(block) {
     [...block.children].slice(5).forEach((item) => {
     item.classList.add('carousel-content');
   });
+  const carouselContent = block.querySelectorAll('.carousel-content');
+  carouselContent.forEach((element) => {
+    const carouselImage = element.children[0];
+    carouselImage.classList.add('carousel-image');
+    const carouselText = element.children[1];
+    carouselText.classList.add('carousel-text');
+  });
+  
    await loadSwiper();
    renderCarousel(block);
 }
