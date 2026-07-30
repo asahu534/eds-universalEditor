@@ -49,7 +49,7 @@
           "valueType": "number"
         },
         {
-          "component": "number",
+          "component": "boolean",
           "name": "showNavigation",
           "label": "Show Navigation Arrows",
           "valueType": "boolean"
