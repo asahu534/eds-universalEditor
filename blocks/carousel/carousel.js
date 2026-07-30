@@ -10,7 +10,9 @@ export default function decorate(block) {
     showPagination.classList.add('show-pagination');
     const loop = block.children[4];
     loop.classList.add('loop');
-    [...block.children].forEach((child) => {
-       console.log(child, 'child-->');
-    });
+
+    [...block.children].slice(5).forEach((item) => {
+    item.classList.add('carousel-content');
+    console.log('item', item);
+  });
 }
