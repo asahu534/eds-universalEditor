@@ -52,13 +52,15 @@
           "component": "boolean",
           "name": "showNavigation",
           "label": "Show Navigation Arrows",
-          "valueType": "boolean"
+          "valueType": "boolean",
+          "value": true
         },
          {
           "component": "boolean",
           "name": "showPagination",
           "label": "Show Pagination Dots",
-          "valueType": "boolean"
+          "valueType": "boolean",
+          "value": true
         },
         {
           "component": "boolean",

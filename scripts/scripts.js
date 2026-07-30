@@ -217,10 +217,29 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+async function loadSwiper() {
+  if (window.Swiper) return;
+
+  const css = document.createElement('link');
+  css.rel = 'stylesheet';
+  css.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+  document.head.appendChild(css);
+
+  await new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
+  await loadSwiper();  
   loadDelayed();
+ 
 }
 
 loadPage();

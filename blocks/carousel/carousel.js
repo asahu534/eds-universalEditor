@@ -1,18 +1,90 @@
 export default function decorate(block) {
-
-    const autoplay = block.children[0];
-    autoplay.classList.add('autoplay');
-    const autoplayDelay = block.children[1];
-    autoplayDelay.classList.add('autoplay-delay');
-    const showNavigation = block.children[2];
-    showNavigation.classList.add('show-navigation');
-    const showPagination = block.children[3];
-    showPagination.classList.add('show-pagination');
-    const loop = block.children[4];
-    loop.classList.add('loop');
+    const autoplayElement = block.children[0];
+    autoplayElement.classList.add('autoplay');
+    const autoplayDelayElement = block.children[1];
+    autoplayDelayElement.classList.add('autoplay-delay');
+    const showNavigationElement = block.children[2];
+    showNavigationElement.classList.add('show-navigation');
+    const showPaginationElement = block.children[3];
+    showPaginationElement.classList.add('show-pagination');
+    const loopElement = block.children[4];
+    loopElement.classList.add('loop');
 
     [...block.children].slice(5).forEach((item) => {
     item.classList.add('carousel-content');
-    console.log('item', item);
+  });
+   renderCarousel(block);
+}
+
+function getCarouselConfig(block) {
+  const autoplay = block.querySelector('.autoplay').textContent.trim() === 'true';
+  const autoplayDelay = parseInt(block.querySelector('.autoplay-delay').textContent.trim(), 10);
+  const showNavigation = block.querySelector('.show-navigation').textContent.trim() === 'true';
+  const showPagination = block.querySelector('.show-pagination').textContent.trim() === 'true';
+  const loop = block.querySelector('.loop').textContent.trim() === 'true';
+return {
+    autoplay,
+    autoplayDelay,  
+    showNavigation,
+    showPagination,
+    loop,
+  };
+}
+
+function renderCarousel(block) {
+  const { autoplay, autoplayDelay, showNavigation, showPagination, loop } = getCarouselConfig(block);
+  const swiper = document.createElement('div');
+  swiper.className = 'swiper';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'swiper-wrapper';
+const slides = [...block.querySelectorAll('.carousel-content')];
+
+slides.forEach((slide) => {
+  slide.classList.add('swiper-slide');
+  wrapper.append(slide);
+});
+
+swiper.append(wrapper);
+
+if (showPagination) {
+  const pagination = document.createElement('div');
+  pagination.className = 'swiper-pagination';
+  swiper.append(pagination);
+}
+if (showNavigation) {
+  const prev = document.createElement('div');
+  prev.className = 'swiper-button-prev';
+  const next = document.createElement('div');
+  next.className = 'swiper-button-next';
+  swiper.append(prev, next);
+}
+ block.replaceChildren(swiper);
+
+  new window.Swiper(swiper, {
+    loop,
+
+    autoplay: autoplay
+      ? {
+          delay: autoplayDelay || 3000,
+          disableOnInteraction: false,
+        }
+      : false,
+
+    pagination: showPagination
+      ? {
+          el: swiper.querySelector('.swiper-pagination'),
+          clickable: true,
+        }
+      : false,
+
+    navigation: showNavigation
+      ? {
+          nextEl: swiper.querySelector('.swiper-button-next'),
+          prevEl: swiper.querySelector('.swiper-button-prev'),
+        }
+      : false,
+    slidesPerView: 1,
+    spaceBetween: 16,
   });
 }
+
