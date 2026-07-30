@@ -1,4 +1,4 @@
-export default function decorate(block) {
+export default async function decorate(block) {
     const autoplayElement = block.children[0];
     autoplayElement.classList.add('autoplay');
     const autoplayDelayElement = block.children[1];
@@ -13,7 +13,25 @@ export default function decorate(block) {
     [...block.children].slice(5).forEach((item) => {
     item.classList.add('carousel-content');
   });
+   await loadSwiper();
    renderCarousel(block);
+}
+
+async function loadSwiper() {
+  if (window.Swiper) return;
+
+  const css = document.createElement('link');
+  css.rel = 'stylesheet';
+  css.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+  document.head.appendChild(css);
+
+  await new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
 }
 
 function getCarouselConfig(block) {
