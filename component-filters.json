@@ -24,7 +24,8 @@
       "fragment",
       "how-it-works",
       "quote",
-      "accordion"
+      "accordion",
+      "carousel"
     ]
   },
   {
@@ -37,6 +38,12 @@
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel",
+    "components": [
+      "carousel-item"
     ]
   },
   {
