@@ -14,7 +14,7 @@
 
 .carousel-image img {
   width: 850px;
-  height: 500px;
+  height: 400px;
 }
 
 .swiper-slide {
@@ -40,6 +40,8 @@
 .swiper-button-next::after {
   font-size: 20px !important;
 }
+
+
 
 @media (width <= 1024px) {
   .carousel-image img {
