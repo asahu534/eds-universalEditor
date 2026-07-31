@@ -17,8 +17,6 @@ export default async function decorate(block) {
   carouselContent.forEach((element) => {
     const carouselImage = element.children[0];
     carouselImage.classList.add('carousel-image');
-    const carouselText = element.children[1];
-    carouselText.classList.add('carousel-text');
   });
   
    await loadSwiper();

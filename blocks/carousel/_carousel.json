@@ -79,12 +79,6 @@
           "name": "image",
           "label": "Image",
           "multi": false
-        },
-        {
-          "component": "richtext",
-          "name": "description",
-          "label": "Description",
-          "valueType": "string"
         }
       ]
     }
