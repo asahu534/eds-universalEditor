@@ -60,7 +60,7 @@ function renderCarousel(block) {
   block.replaceChildren(swiper);
 
   const swipe = new window.Swiper(swiper, {
-     speed: 900,
+    speed: 900,
     autoplay: autoplay
       ? {
         delay: autoplayDelay || 3000,
