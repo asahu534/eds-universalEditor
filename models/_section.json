@@ -71,7 +71,9 @@
         "pagelist",
         "fragment",
         "how-it-works",
-        "quote"
+        "quote",
+        "accordion",
+        "carousel"
       ]
     }
   ]

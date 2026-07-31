@@ -155,6 +155,25 @@
     ]
   },
   {
+    "id": "accordionItem",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "body",
+        "label": "Body",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -170,6 +189,49 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "carousel",
+    "fields": [
+      {
+        "component": "boolean",
+        "label": "Autoplay",
+        "name": "autoplay",
+        "valueType": "boolean"
+      },
+      {
+        "component": "number",
+        "name": "autoplayDelay",
+        "label": "Autoplay Delay",
+        "valueType": "number"
+      },
+      {
+        "component": "boolean",
+        "name": "showNavigation",
+        "label": "Show Navigation Arrows",
+        "valueType": "boolean",
+        "value": true
+      },
+      {
+        "component": "boolean",
+        "name": "showPagination",
+        "label": "Show Pagination Dots",
+        "valueType": "boolean",
+        "value": true
+      }
+    ]
+  },
+  {
+    "id": "carousel-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
       }
     ]
   },
