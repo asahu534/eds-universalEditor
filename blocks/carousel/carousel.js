@@ -1,28 +1,3 @@
-export default async function decorate(block) {
-  const autoplayElement = block.children[0];
-  autoplayElement.classList.add('autoplay');
-  const autoplayDelayElement = block.children[1];
-  autoplayDelayElement.classList.add('autoplay-delay');
-  const showNavigationElement = block.children[2];
-  showNavigationElement.classList.add('show-navigation');
-  const showPaginationElement = block.children[3];
-  showPaginationElement.classList.add('show-pagination');
-  const loopElement = block.children[4];
-  loopElement.classList.add('loop');
-
-  [...block.children].slice(5).forEach((item) => {
-    item.classList.add('carousel-content');
-  });
-  const carouselContent = block.querySelectorAll('.carousel-content');
-  carouselContent.forEach((element) => {
-    const carouselImage = element.children[0];
-    carouselImage.classList.add('carousel-image');
-  });
-
-  await loadSwiper();
-  renderCarousel(block);
-}
-
 async function loadSwiper() {
   if (window.Swiper) return;
 
@@ -45,19 +20,17 @@ function getCarouselConfig(block) {
   const autoplayDelay = parseInt(block.querySelector('.autoplay-delay').textContent.trim(), 10);
   const showNavigation = block.querySelector('.show-navigation').textContent.trim() === 'true';
   const showPagination = block.querySelector('.show-pagination').textContent.trim() === 'true';
-  const loop = block.querySelector('.loop').textContent.trim() === 'true';
   return {
     autoplay,
     autoplayDelay,
     showNavigation,
     showPagination,
-    loop,
   };
 }
 
 function renderCarousel(block) {
   const {
-    autoplay, autoplayDelay, showNavigation, showPagination, loop,
+    autoplay, autoplayDelay, showNavigation, showPagination,
   } = getCarouselConfig(block);
   const swiper = document.createElement('div');
   swiper.className = 'swiper';
@@ -86,9 +59,7 @@ function renderCarousel(block) {
   }
   block.replaceChildren(swiper);
 
-  new window.Swiper(swiper, {
-    loop,
-
+  const swipe = new window.Swiper(swiper, {
     autoplay: autoplay
       ? {
         delay: autoplayDelay || 3000,
@@ -112,4 +83,28 @@ function renderCarousel(block) {
     slidesPerView: 1,
     spaceBetween: 16,
   });
+  swipe.update();
+}
+
+export default async function decorate(block) {
+  const autoplayElement = block.children[0];
+  autoplayElement.classList.add('autoplay');
+  const autoplayDelayElement = block.children[1];
+  autoplayDelayElement.classList.add('autoplay-delay');
+  const showNavigationElement = block.children[2];
+  showNavigationElement.classList.add('show-navigation');
+  const showPaginationElement = block.children[3];
+  showPaginationElement.classList.add('show-pagination');
+
+  [...block.children].slice(4).forEach((item) => {
+    item.classList.add('carousel-content');
+  });
+  const carouselContent = block.querySelectorAll('.carousel-content');
+  carouselContent.forEach((element) => {
+    const carouselImage = element.children[0];
+    carouselImage.classList.add('carousel-image');
+  });
+
+  await loadSwiper();
+  renderCarousel(block);
 }

@@ -220,12 +220,6 @@
         "label": "Show Pagination Dots",
         "valueType": "boolean",
         "value": true
-      },
-      {
-        "component": "boolean",
-        "name": "loop",
-        "label": "Loop",
-        "valueType": "boolean"
       }
     ]
   },
