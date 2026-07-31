@@ -1,3 +1,6 @@
+.carousel .swiper-wrapper {
+  transition-timing-function: ease-in-out;
+}
 
 .carousel-content {
   position: relative;
