@@ -1,16 +1,16 @@
 export default async function decorate(block) {
-    const autoplayElement = block.children[0];
-    autoplayElement.classList.add('autoplay');
-    const autoplayDelayElement = block.children[1];
-    autoplayDelayElement.classList.add('autoplay-delay');
-    const showNavigationElement = block.children[2];
-    showNavigationElement.classList.add('show-navigation');
-    const showPaginationElement = block.children[3];
-    showPaginationElement.classList.add('show-pagination');
-    const loopElement = block.children[4];
-    loopElement.classList.add('loop');
+  const autoplayElement = block.children[0];
+  autoplayElement.classList.add('autoplay');
+  const autoplayDelayElement = block.children[1];
+  autoplayDelayElement.classList.add('autoplay-delay');
+  const showNavigationElement = block.children[2];
+  showNavigationElement.classList.add('show-navigation');
+  const showPaginationElement = block.children[3];
+  showPaginationElement.classList.add('show-pagination');
+  const loopElement = block.children[4];
+  loopElement.classList.add('loop');
 
-    [...block.children].slice(5).forEach((item) => {
+  [...block.children].slice(5).forEach((item) => {
     item.classList.add('carousel-content');
   });
   const carouselContent = block.querySelectorAll('.carousel-content');
@@ -18,9 +18,9 @@ export default async function decorate(block) {
     const carouselImage = element.children[0];
     carouselImage.classList.add('carousel-image');
   });
-  
-   await loadSwiper();
-   renderCarousel(block);
+
+  await loadSwiper();
+  renderCarousel(block);
 }
 
 async function loadSwiper() {
@@ -46,9 +46,9 @@ function getCarouselConfig(block) {
   const showNavigation = block.querySelector('.show-navigation').textContent.trim() === 'true';
   const showPagination = block.querySelector('.show-pagination').textContent.trim() === 'true';
   const loop = block.querySelector('.loop').textContent.trim() === 'true';
-return {
+  return {
     autoplay,
-    autoplayDelay,  
+    autoplayDelay,
     showNavigation,
     showPagination,
     loop,
@@ -56,59 +56,60 @@ return {
 }
 
 function renderCarousel(block) {
-  const { autoplay, autoplayDelay, showNavigation, showPagination, loop } = getCarouselConfig(block);
+  const {
+    autoplay, autoplayDelay, showNavigation, showPagination, loop,
+  } = getCarouselConfig(block);
   const swiper = document.createElement('div');
   swiper.className = 'swiper';
   const wrapper = document.createElement('div');
   wrapper.className = 'swiper-wrapper';
-const slides = [...block.querySelectorAll('.carousel-content')];
+  const slides = [...block.querySelectorAll('.carousel-content')];
 
-slides.forEach((slide) => {
-  slide.classList.add('swiper-slide');
-  wrapper.append(slide);
-});
+  slides.forEach((slide) => {
+    slide.classList.add('swiper-slide');
+    wrapper.append(slide);
+  });
 
-swiper.append(wrapper);
+  swiper.append(wrapper);
 
-if (showPagination) {
-  const pagination = document.createElement('div');
-  pagination.className = 'swiper-pagination';
-  swiper.append(pagination);
-}
-if (showNavigation) {
-  const prev = document.createElement('div');
-  prev.className = 'swiper-button-prev';
-  const next = document.createElement('div');
-  next.className = 'swiper-button-next';
-  swiper.append(prev, next);
-}
- block.replaceChildren(swiper);
+  if (showPagination) {
+    const pagination = document.createElement('div');
+    pagination.className = 'swiper-pagination';
+    swiper.append(pagination);
+  }
+  if (showNavigation) {
+    const prev = document.createElement('div');
+    prev.className = 'swiper-button-prev';
+    const next = document.createElement('div');
+    next.className = 'swiper-button-next';
+    swiper.append(prev, next);
+  }
+  block.replaceChildren(swiper);
 
   new window.Swiper(swiper, {
     loop,
 
     autoplay: autoplay
       ? {
-          delay: autoplayDelay || 3000,
-          disableOnInteraction: false,
-        }
+        delay: autoplayDelay || 3000,
+        disableOnInteraction: false,
+      }
       : false,
 
     pagination: showPagination
       ? {
-          el: swiper.querySelector('.swiper-pagination'),
-          clickable: true,
-        }
+        el: swiper.querySelector('.swiper-pagination'),
+        clickable: true,
+      }
       : false,
 
     navigation: showNavigation
       ? {
-          nextEl: swiper.querySelector('.swiper-button-next'),
-          prevEl: swiper.querySelector('.swiper-button-prev'),
-        }
+        nextEl: swiper.querySelector('.swiper-button-next'),
+        prevEl: swiper.querySelector('.swiper-button-prev'),
+      }
       : false,
     slidesPerView: 1,
     spaceBetween: 16,
   });
 }
-
