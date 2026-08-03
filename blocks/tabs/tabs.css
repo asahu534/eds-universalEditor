@@ -1,0 +1,32 @@
+.tabs-list {
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabs-button {
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.tabs-button.active {
+  border-bottom: 2px solid #000;
+  font-weight: 700;
+}
+
+.tabs-panel {
+  display: none;
+  padding-top: 16px;
+}
+
+.tabs-panel.active {
+  display: block;
+}
+
+button:focus,
+button:focus-visible {
+border: none !important;
+border-bottom: 2px solid #000 !important;
+}

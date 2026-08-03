@@ -35,6 +35,28 @@
   ],
   "models": [
     {
+        "id": "tabs",
+        "fields": [
+            {
+            "component": "select",
+            "name": "style",
+            "label": "Style",
+            "valueType": "string",
+            "description": "Layout style for the tabs",
+            "options": [
+                {
+                "name": "Horizontal Tabs",
+                "value": "horizontal-tabs"
+                },
+                {
+                "name": "Vertical Tabs",
+                "value": "vertical-tabs"
+                }
+            ]
+            }
+        ]
+    },
+    {
       "id": "tab-item",
       "fields": [
         {
