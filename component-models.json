@@ -521,7 +521,7 @@
     "fields": [
       {
         "component": "select",
-        "name": "style",
+        "name": "classes",
         "label": "Style",
         "valueType": "string",
         "description": "Layout style for the tabs",
