@@ -72,5 +72,11 @@
     "components": [
       "stat"
     ]
+  },
+  {
+    "id": "tabs",
+    "components": [
+      "tab-item"
+    ]
   }
 ]
