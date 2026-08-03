@@ -25,7 +25,8 @@
       "how-it-works",
       "quote",
       "accordion",
-      "carousel"
+      "carousel",
+      "tabs"
     ]
   },
   {
@@ -71,6 +72,12 @@
     "id": "stats",
     "components": [
       "stat"
+    ]
+  },
+  {
+    "id": "tabs",
+    "components": [
+      "tab-item"
     ]
   }
 ]
