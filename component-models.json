@@ -517,6 +517,23 @@
     ]
   },
   {
+    "id": "tab-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Tab Title",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "content",
+        "label": "Tab Content",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "testimonial",
     "fields": [
       {
