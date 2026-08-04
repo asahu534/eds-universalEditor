@@ -13,19 +13,19 @@ Most blocks have a **primary pattern** plus **secondary traits** (e.g. a Standal
 
 ## Summary
 
-| Block | Primary pattern | Secondary traits |
-|---|---|---|
-| hero | Standalone | + Auto-blocked (hybrid) |
-| cta | Standalone | + Configuration (Default/Centered) |
-| testimonial | Standalone | — |
-| fragment | Standalone (structural reference) | — |
-| cards | Collection (→ card) | — |
-| features | Collection (→ feature) | — |
-| stats | Collection (→ stat) | — |
-| columns | Configuration (Layout select) | + contains `column` children |
-| comments | Configuration (Grid/List) | + dynamic (REST fetch) |
-| page-list | Configuration (sort) | + dynamic (query-index.json) |
-| embed | Auto-blocked (pure) | — (no model, not in UE picker) |
+| Block         | Primary pattern | Secondary traits |
+|---------------|---|---|
+| hero          | Standalone | + Auto-blocked (hybrid) |
+| cta           | Standalone | + Configuration (Default/Centered) |
+| testimonial   | Standalone | — |
+| fragment      | Standalone (structural reference) | — |
+| cards         | Collection (→ card) | — |
+| features      | Collection (→ feature) | — |
+| stats         | Collection (→ stat) | — |
+| columns       | Configuration (Layout select) | + contains `column` children |
+| comments      | Configuration (Grid/List) | + dynamic (REST fetch) |
+| articles-list | Configuration (sort) | + dynamic (query-index.json) |
+| embed         | Auto-blocked (pure) | — (no model, not in UE picker) |
 
 ## Grouped by pattern
 
@@ -80,7 +80,7 @@ Fields: `columns`, `rows`, `classes` (select: Equal width / Wide left / Wide rig
 ### comments — Configuration (dynamic)
 Fields: `endpoint` (public REST API URL, CORS-enabled), `limit`, `classes` (select: Grid / List). Fetches a JSON array at runtime (client-side) and renders name / email / body per item, with skeleton and error states.
 
-### page-list — Configuration (dynamic, index-driven)
+### articles-list — Configuration (dynamic, index-driven)
 Fields: `pathPrefix`, `sort` (select: Newest first / Title A–Z), `limit`. Reads `/query-index.json` at runtime, filters published pages by path prefix, and renders auto-updating cards (title / description / image). Self-updates as pages are published.
 
 Note: the block's `id`/`model` is `pagelist` while its rendered class / folder is `articles-list` (from the block `name` "Page List"). See the maintenance note on the block-name → folder convention.
@@ -92,7 +92,7 @@ No `_embed.json` model — not in the Universal Editor picker. Created only by `
 
 - **hero is a hybrid** — Standalone by model, Auto-blocked by construction. The model powers authored heroes; `buildHeroBlock()` promotes plain picture+H1 content into a hero on delivery.
 - **columns is dual** — Configuration (Layout select) plus a container of `column` children (core-boilerplate containment).
-- **comments and page-list are Configuration-shaped but dynamic** — their defining trait is runtime data (external REST / the site index). "Configuration" is the closest canonical label; "dynamic/data-driven" is the accurate functional description. No server-side code is involved — data is fetched client-side.
+- **comments and articles-list are Configuration-shaped but dynamic** — their defining trait is runtime data (external REST / the site index). "Configuration" is the closest canonical label; "dynamic/data-driven" is the accurate functional description. No server-side code is involved — data is fetched client-side.
 - **embed is the pure Auto-blocked example** — it has no model and cannot be inserted from the picker; it materializes on the delivered page from plain content. Auto-blocking is a delivery-time transform, so it does not appear as a block in the Universal Editor authoring canvas.
 - **fragment is structural** — Standalone-shaped, but its purpose is content inclusion, not a content unit.
 
