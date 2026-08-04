@@ -1,8 +1,8 @@
 {
   "definitions": [
     {
-      "title": "Page List",
-      "id": "pagelist",
+      "title": "Articles List",
+      "id": "articleslist",
       "plugins": {
         "xwalk": {
           "page": {
@@ -18,7 +18,7 @@
   ],
   "models": [
     {
-      "id": "pagelist",
+      "id": "articleslist",
       "fields": [
         {
           "component": "text",
