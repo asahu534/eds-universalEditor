@@ -67,13 +67,12 @@
         "features",
         "testimonial",
         "stats",
-        "comments",
-        "pagelist",
         "fragment",
-        "how-it-works",
         "quote",
         "accordion",
-        "carousel"
+        "carousel",
+        "articleslist",
+        "commentsfeed"
       ]
     }
   ]
