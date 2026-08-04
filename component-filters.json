@@ -23,6 +23,7 @@
       "quote",
       "accordion",
       "carousel",
+      "tabs",
       "articleslist",
       "commentsfeed"
     ]
@@ -70,6 +71,12 @@
     "id": "stats",
     "components": [
       "stat"
+    ]
+  },
+  {
+    "id": "tabs",
+    "components": [
+      "tab-item"
     ]
   }
 ]

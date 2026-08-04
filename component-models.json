@@ -517,6 +517,46 @@
     ]
   },
   {
+    "id": "tabs",
+    "fields": [
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Style",
+        "valueType": "string",
+        "description": "Layout style for the tabs",
+        "options": [
+          {
+            "name": "Horizontal Tabs",
+            "value": "horizontal-tabs"
+          },
+          {
+            "name": "Vertical Tabs",
+            "value": "vertical-tabs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tab-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Tab Title",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "richtext",
+        "name": "content",
+        "label": "Tab Content",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "testimonial",
     "fields": [
       {
