@@ -69,7 +69,9 @@ function renderMessage(container, message) {
 }
 
 export default async function decorate(block) {
-  const heading = block.textContent.trim() || 'Search Results';
+  const configRows = [...block.children];
+  const heading = configRows[0]?.textContent.trim() || 'Search Results';
+  const emptyMessage = configRows[1]?.textContent.trim() || 'Enter a search term to see results.';
   const query = getQuery();
 
   block.textContent = '';
@@ -79,7 +81,7 @@ export default async function decorate(block) {
   block.append(header);
 
   if (!query) {
-    renderMessage(header, 'Enter a search term to see results.');
+    renderMessage(header, emptyMessage);
     return;
   }
 
