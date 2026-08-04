@@ -69,11 +69,11 @@
         "stats",
         "comments",
         "fragment",
-        "how-it-works",
         "quote",
         "accordion",
         "carousel",
-        "articleslist"
+        "articleslist",
+        "commentsfeed"
       ]
     }
   ]

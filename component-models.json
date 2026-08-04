@@ -313,7 +313,7 @@
     ]
   },
   {
-    "id": "comments",
+    "id": "commentsfeed",
     "fields": [
       {
         "component": "text",

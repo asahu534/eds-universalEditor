@@ -205,8 +205,8 @@
           }
         },
         {
-          "title": "Comments",
-          "id": "comments",
+          "title": "Comments Feed",
+          "id": "commentsfeed",
           "plugins": {
             "xwalk": {
               "page": {
