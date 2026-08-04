@@ -19,18 +19,32 @@
       "features",
       "testimonial",
       "stats",
-      "comments",
-      "pagelist",
       "fragment",
-      "how-it-works",
       "quote",
+      "accordion",
+      "carousel",
+      "tabs",
+      "articleslist",
+      "commentsfeed",
       "search-results"
+    ]
+  },
+  {
+    "id": "accordion",
+    "components": [
+      "accordionItem"
     ]
   },
   {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel",
+    "components": [
+      "carousel-item"
     ]
   },
   {
@@ -58,6 +72,12 @@
     "id": "stats",
     "components": [
       "stat"
+    ]
+  },
+  {
+    "id": "tabs",
+    "components": [
+      "tab-item"
     ]
   }
 ]

@@ -1,15 +1,15 @@
 {
   "definitions": [
     {
-      "title": "Page List",
-      "id": "pagelist",
+      "title": "Articles List",
+      "id": "articleslist",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
-              "name": "Page List",
-              "model": "pagelist"
+              "name": "Articles List",
+              "model": "articleslist"
             }
           }
         }
@@ -18,7 +18,7 @@
   ],
   "models": [
     {
-      "id": "pagelist",
+      "id": "articleslist",
       "fields": [
         {
           "component": "text",
