@@ -22,31 +22,31 @@ function sortItems(items, sort) {
 
 function renderCard(item) {
   const li = document.createElement('li');
-  li.className = 'page-list-item';
+  li.className = 'articles-list-item';
 
   const link = document.createElement('a');
-  link.className = 'page-list-link';
+  link.className = 'articles-list-link';
   link.href = item.path;
 
   if (item.image) {
     const picture = createOptimizedPicture(item.image, item.title || '', false, [{ width: '750' }]);
     const media = document.createElement('div');
-    media.className = 'page-list-image';
+    media.className = 'articles-list-image';
     media.append(picture);
     link.append(media);
   }
 
   const bodyEl = document.createElement('div');
-  bodyEl.className = 'page-list-body';
+  bodyEl.className = 'articles-list-body';
 
   const title = document.createElement('h3');
-  title.className = 'page-list-title';
+  title.className = 'articles-list-title';
   title.textContent = item.title || item.path;
   bodyEl.append(title);
 
   if (item.description) {
     const desc = document.createElement('p');
-    desc.className = 'page-list-desc';
+    desc.className = 'articles-list-desc';
     desc.textContent = item.description;
     bodyEl.append(desc);
   }
@@ -59,7 +59,7 @@ function renderCard(item) {
 function renderMessage(block, message) {
   block.textContent = '';
   const p = document.createElement('p');
-  p.className = 'page-list-message';
+  p.className = 'articles-list-message';
   p.textContent = message;
   block.append(p);
 }
@@ -90,7 +90,7 @@ export default async function decorate(block) {
     }
 
     const list = document.createElement('ul');
-    list.className = 'page-list-list';
+    list.className = 'articles-list-list';
     items.forEach((item) => list.append(renderCard(item)));
     block.append(list);
   } catch (error) {

@@ -19,14 +19,13 @@
       "features",
       "testimonial",
       "stats",
-      "comments",
-      "pagelist",
       "fragment",
-      "how-it-works",
       "quote",
       "accordion",
       "carousel",
       "tabs"
+      "articleslist",
+      "commentsfeed"
     ]
   },
   {
