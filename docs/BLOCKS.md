@@ -9,7 +9,7 @@ This document catalogs the blocks in this project and categorizes each by its Un
 - **Configuration** — behavior/layout driven by option fields (select/multiselect) whose values become CSS classes or variants.
 - **Auto-blocked** — created programmatically in JavaScript from plain content; not (or not only) inserted via the Universal Editor component picker.
 
-Most blocks have a **primary pattern** plus **secondary traits** (e.g. a Standalone block that also exposes a Configuration variant). Two blocks (`comments`, `articles-list`) are Configuration-shaped but functionally **dynamic/data-driven**.
+Most blocks have a **primary pattern** plus **secondary traits** (e.g. a Standalone block that also exposes a Configuration variant). Two blocks (`comments-feed`, `articles-list`) are Configuration-shaped but functionally **dynamic/data-driven**.
 
 ## Summary
 
@@ -23,7 +23,7 @@ Most blocks have a **primary pattern** plus **secondary traits** (e.g. a Standal
 | features      | Collection (→ feature) | — |
 | stats         | Collection (→ stat) | — |
 | columns       | Configuration (Layout select) | + contains `column` children |
-| comments      | Configuration (Grid/List) | + dynamic (REST fetch) |
+| comments-feed | Configuration (Grid/List) | + dynamic (REST fetch) |
 | articles-list | Configuration (sort) | + dynamic (query-index.json) |
 | embed         | Auto-blocked (pure) | — (no model, not in UE picker) |
 
@@ -42,7 +42,7 @@ Most blocks have a **primary pattern** plus **secondary traits** (e.g. a Standal
 
 **Configuration**
 - `columns` (Layout select; also contains `column` children)
-- `comments` (Grid/List select; dynamic REST)
+- `comments-feed` (Grid/List select; dynamic REST)
 - `articles-list` (sort select; dynamic, index-driven)
 - `cta` carries a Configuration variant on top of Standalone
 
@@ -77,7 +77,7 @@ Parent `stats` + repeatable item `stat`. Item fields: `value`, `label`. Filter: 
 ### columns — Configuration (+ container)
 Fields: `columns`, `rows`, `classes` (select: Equal width / Wide left / Wide right). Filters: `columns → [column]`, `column → [text, image, button, title]`. Layout variant drives the desktop grid.
 
-### comments — Configuration (dynamic)
+### comments-feed — Configuration (dynamic)
 Fields: `endpoint` (public REST API URL, CORS-enabled), `limit`, `classes` (select: Grid / List). Fetches a JSON array at runtime (client-side) and renders name / email / body per item, with skeleton and error states.
 
 ### articles-list — Configuration (dynamic, index-driven)
@@ -92,7 +92,7 @@ No `_embed.json` model — not in the Universal Editor picker. Created only by `
 
 - **hero is a hybrid** — Standalone by model, Auto-blocked by construction. The model powers authored heroes; `buildHeroBlock()` promotes plain picture+H1 content into a hero on delivery.
 - **columns is dual** — Configuration (Layout select) plus a container of `column` children (core-boilerplate containment).
-- **comments and articles-list are Configuration-shaped but dynamic** — their defining trait is runtime data (external REST / the site index). "Configuration" is the closest canonical label; "dynamic/data-driven" is the accurate functional description. No server-side code is involved — data is fetched client-side.
+- **comments-feed and articles-list are Configuration-shaped but dynamic** — their defining trait is runtime data (external REST / the site index). "Configuration" is the closest canonical label; "dynamic/data-driven" is the accurate functional description. No server-side code is involved — data is fetched client-side.
 - **embed is the pure Auto-blocked example** — it has no model and cannot be inserted from the picker; it materializes on the delivered page from plain content. Auto-blocking is a delivery-time transform, so it does not appear as a block in the Universal Editor authoring canvas.
 - **fragment is structural** — Standalone-shaped, but its purpose is content inclusion, not a content unit.
 
