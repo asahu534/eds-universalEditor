@@ -498,6 +498,19 @@
     ]
   },
   {
+    "id": "search-results",
+    "fields": [
+      {
+        "component": "text",
+        "name": "heading",
+        "label": "Heading",
+        "description": "Optional heading shown above the results",
+        "valueType": "string",
+        "value": "Search Results"
+      }
+    ]
+  },
+  {
     "id": "stat",
     "fields": [
       {
