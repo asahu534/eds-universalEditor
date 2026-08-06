@@ -114,6 +114,8 @@ body {
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   line-height: 1.6;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 body.appear {
