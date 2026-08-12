@@ -108,12 +108,13 @@
 
 body {
   display: none;
-  margin: 0;
   background-color: var(--color-surface);
   color: var(--color-on-surface);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   line-height: 1.6;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 body.appear {
