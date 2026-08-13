@@ -269,11 +269,15 @@
           "id": "fragment",
           "plugins": {
             "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block",
+              "cf": {
+                "name": "Sample CF",
+                "cfModel": "sample-cf",
+                "cfFolder": "en",
+                "title": "content-fragment",
+                "description": "sample cf",
                 "template": {
-                  "name": "Fragment",
-                  "model": "fragment"
+                  "name": "Content Fragment",
+                  "model": "content-fragment"
                 }
               }
             }
