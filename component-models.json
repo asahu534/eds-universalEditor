@@ -427,14 +427,9 @@
     "id": "fragment",
     "fields": [
       {
-        "component": "aem-content-fragment",
-        "name": "cf-reference",
-        "label": "Content Fragment Picker",
-        "valueType": "string",
-        "variationName": "contentFragmentVariation",
-        "validation": {
-          "rootPath": "/content/dam/universal-editor-site/content-fragments/en/"
-        }
+        "component": "aem-content",
+        "name": "reference",
+        "label": "Reference"
       }
     ]
   },
