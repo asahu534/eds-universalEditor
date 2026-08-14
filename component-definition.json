@@ -266,7 +266,7 @@
         },
         {
           "title": "Fragment",
-          "id": "fragment",
+          "id": "content-fragment",
           "plugins": {
             "xwalk": {
               "cf": {

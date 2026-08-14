@@ -2,7 +2,7 @@
   "definitions": [
     {
       "title": "Fragment",
-      "id": "fragment",
+      "id": "content-fragment",
       "plugins": {
         "xwalk": {
           "cf": {
@@ -22,7 +22,7 @@
   ],
   "models": [
     {
-      "id": "fragment",
+      "id": "content-fragment",
       "fields": [
         {
           "component": "aem-content-fragment",
