@@ -265,20 +265,25 @@
           }
         },
         {
-          "title": "Fragment",
-          "id": "content-fragment",
+          "title": "Content Fragment New",
+          "id": "cf-fragment",
           "plugins": {
             "xwalk": {
-              "cf": {
-                "name": "Sample CF",
-                "cfModel": "sample-cf",
-                "cfFolder": "en",
-                "title": "content-fragment",
-                "description": "sample cf",
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "name": "Content Fragment",
-                  "model": "content-fragment"
+                  "name": "Content Fragment New",
+                  "model": "cf-fragment"
                 }
+              },
+              "cf": {
+                "type": "reference",
+                "editable": true,
+                "path": {
+                  "type": "string",
+                  "default": "/content/dam/universal-editor-site/content-fragments/en/content-fragment"
+                },
+                "fragmentModel": "sample-cf"
               }
             }
           }

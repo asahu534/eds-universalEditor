@@ -424,15 +424,16 @@
     ]
   },
   {
-    "id": "content-fragment",
+    "id": "cf-fragment",
     "fields": [
       {
         "component": "aem-content-fragment",
-        "name": "cf-picker",
-        "label": "Content Fragment Picker",
+        "name": "cfPath",
+        "label": "Select a Content Fragment",
         "valueType": "string",
+        "variationName": "contentFragmentVariation",
         "validation": {
-          "rootPath": "/content/dam"
+          "rootPath": "/content/dam/universal-editor-site/content-fragments/en"
         }
       }
     ]
