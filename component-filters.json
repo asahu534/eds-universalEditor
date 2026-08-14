@@ -25,7 +25,8 @@
       "carousel",
       "tabs",
       "articleslist",
-      "commentsfeed"
+      "commentsfeed",
+      "content-fragment"
     ]
   },
   {

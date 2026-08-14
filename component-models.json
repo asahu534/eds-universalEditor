@@ -350,6 +350,16 @@
     ]
   },
   {
+    "id": "content-fragment",
+    "fields": [
+      {
+        "component": "aem-content-fragment",
+        "name": "cf-reference",
+        "label": "Content Fragment Reference"
+      }
+    ]
+  },
+  {
     "id": "cta",
     "fields": [
       {
