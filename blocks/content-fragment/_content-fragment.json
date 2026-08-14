@@ -11,6 +11,17 @@
               "name": "Content Fragment",
               "model": "content-fragment"
             }
+          },
+          "cf": {
+            "name": "Sample CF",
+            "cfModel": "sample-cf",
+            "cfFolder": "en",
+            "title": "Sample",
+            "description": "sample description",
+            "template": {
+              "name": "Content Fragment",
+              "model": "content-fragment"
+            }
           }
         }
       }
@@ -23,7 +34,10 @@
         {
           "component": "aem-content-fragment",
           "name": "cf-reference",
-          "label": "Content Fragment Reference"
+          "label": "Content Fragment Reference",
+          "validation": {
+            "rootPath": "/content/dam/universal-editor-site/content-fragments/en/"
+          }
         }
       ]
     }
