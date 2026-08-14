@@ -1,25 +1,20 @@
 {
   "definitions": [
     {
-      "title": "Content Fragment New",
-      "id": "cf-fragment",
+      "title": "Content Fragment",
+      "id": "fragment",
       "plugins": {
         "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "Content Fragment New",
-              "model": "cf-fragment"
-            }
-          },
           "cf": {
-            "type": "reference",
-            "editable": true,
-            "path": {
-              "type": "string",
-              "default": "/content/dam/universal-editor-site/content-fragments/en/content-fragment"
-            },
-            "fragmentModel": "sample-cf"
+            "name": "Sample CF",
+            "cfModel": "sample-cf",
+            "cfFolder": "en",
+            "title": "Sample",
+            "description": "sample description",
+            "template": {
+              "name": "Content Fragment",
+              "model": "fragment"
+            }
           }
         }
       }
@@ -27,19 +22,20 @@
   ],
   "models": [
     {
-      "id": "cf-fragment",
+      "id": "fragment",
       "fields": [
         {
           "component": "aem-content-fragment",
-          "name": "cfPath",
-          "label": "Select a Content Fragment",
+          "name": "cf-reference",
+          "label": "Content Fragment Picker",
           "valueType": "string",
           "variationName": "contentFragmentVariation",
           "validation": {
-            "rootPath": "/content/dam/universal-editor-site/content-fragments/en"
+            "rootPath": "/content/dam/universal-editor-site/content-fragments/en/"
           }
         }
-      ]}
-    ],
+      ]
+    }
+  ],
   "filters": []
 }
