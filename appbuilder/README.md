@@ -2,9 +2,24 @@
 
 Welcome to my Adobe I/O Application!
 
-## Setup
+## Setup (from scratch, e.g. a fresh clone)
 
-- Populate the `.env` file in the project root and fill it as shown [below](#env)
+The `.env`, `.aio`, and `console.json` files hold secrets and are **not committed**, so
+they are missing after a clone. Recreate them once per machine:
+
+1. `cd appbuilder`
+2. `npm install`
+3. `cp .env.example .env` (PowerShell: `Copy-Item .env.example .env`)
+4. Fill in the values. The fastest way for the Adobe I/O Runtime values is:
+   - `aio login`
+   - `aio app use` — pick your Org > Project > Workspace; this generates `.aio` /
+     `console.json` and can populate the `AIO_runtime_*` values in `.env`.
+5. Add the action secrets (`SERVICE_API_KEY`, `CRM_API_TOKEN`, `SLACK_WEBHOOK_URL`) —
+   ask a teammate or your secrets manager for these; they are never stored in git.
+6. `aio app run`
+
+If you skip step 3/4 you will hit:
+`Error: missing Adobe I/O Runtime namespace, did you set the AIO_RUNTIME_NAMESPACE environment variable?`
 
 ## Local Dev
 
