@@ -226,31 +226,6 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
-      },
-      {
-        "component": "select",
-        "name": "sort",
-        "label": "Sort By",
-        "valueType": "string",
-        "value": "newest",
-        "options": [
-          {
-            "name": "Newest first",
-            "value": "newest"
-          },
-          {
-            "name": "Title (A–Z)",
-            "value": "title"
-          }
-        ]
-      },
-      {
-        "component": "aem-content-fragment",
-        "name": "cf-reference",
-        "label": "Content Fragment Reference",
-        "validation": {
-          "rootPath": "/content/dam/universal-editor-site/content-fragments/en/"
-        }
       }
     ]
   },
