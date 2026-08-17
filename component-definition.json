@@ -232,15 +232,13 @@
                 }
               },
               "cf": {
-                "name": "Sample CF",
-                "cfModel": "sample-cf",
-                "cfFolder": "en",
-                "title": "Sample",
-                "description": "sample description",
-                "template": {
-                  "name": "Content Fragment",
-                  "model": "content-fragment"
-                }
+                "type": "reference",
+                "editable": true,
+                "path": {
+                  "type": "string",
+                  "default": "/content/dam/universal-editor-site/content-fragments/en/"
+                },
+                "fragmentModel": "sample-cf"
               }
             }
           }
