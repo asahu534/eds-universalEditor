@@ -139,6 +139,17 @@
                   "name": "Cards",
                   "filter": "cards"
                 }
+              },
+              "cf": {
+                "name": "Sample CF",
+                "cfModel": "sample-cf",
+                "cfFolder": "en",
+                "title": "Sample",
+                "description": "sample description",
+                "template": {
+                  "name": "Content Fragment",
+                  "model": "content-fragment"
+                }
               }
             }
           }
