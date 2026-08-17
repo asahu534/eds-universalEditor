@@ -61,14 +61,6 @@
           "valueType": "string"
         },
         {
-          "component": "aem-content-fragment",
-          "name": "cf-reference",
-          "label": "Content Fragment Reference",
-          "validation": {
-            "rootPath": "/content/dam/universal-editor-site/content-fragments/en/"
-          }
-        },
-        {
           "component": "select",
           "name": "sort",
           "label": "Sort By",
@@ -84,6 +76,14 @@
               "value": "title"
             }
           ]
+        },
+        {
+          "component": "aem-content-fragment",
+          "name": "cf-reference",
+          "label": "Content Fragment Reference",
+          "validation": {
+            "rootPath": "/content/dam/universal-editor-site/content-fragments/en/"
+          }
         }
       ]
     }
