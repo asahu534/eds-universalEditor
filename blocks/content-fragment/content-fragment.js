@@ -1,7 +1,7 @@
 /*
- * Fragment Block
- * Include content on a page as a fragment.
- * https://www.aem.live/developer/block-collection/fragment
+ * Content Fragment Block
+ * Renders a referenced AEM Content Fragment and instruments it as an
+ * editable reference for the Universal Editor ("Open in CF Editor").
  */
 
 // eslint-disable-next-line import/no-cycle
@@ -44,9 +44,52 @@ export async function loadFragment(path) {
   return null;
 }
 
+/**
+ * Extracts the authored Content Fragment path from the block.
+ * The `cf-reference` (aem-content-fragment) field arrives as a link or plain text.
+ * @param {Element} block
+ * @returns {string} the fragment path (JCR path), or '' if none
+ */
+function getFragmentPath(block) {
+  const link = block.querySelector('a[href]');
+  const raw = (link ? link.getAttribute('href') : block.textContent).trim();
+  if (!raw) return '';
+  // normalise to a JCR path: strip origin + any .html/.plain.html/.model.json suffixes
+  try {
+    const { pathname } = new URL(raw, window.location.href);
+    return pathname.replace(/(\.plain)?\.html$/, '').replace(/\.model\.json$/, '');
+  } catch (e) {
+    return raw.replace(/(\.plain)?\.html$/, '');
+  }
+}
+
+/**
+ * Marks the block as an editable Content Fragment reference so the Universal
+ * Editor shows "Open in CF Editor". The reference resource is the fragment's
+ * own path expressed as an AEM connection URN.
+ * @param {Element} block
+ * @param {string} fragmentPath JCR path of the referenced fragment
+ */
+function instrumentReference(block, fragmentPath) {
+  if (!fragmentPath) return;
+  block.setAttribute('data-aue-type', 'reference');
+  block.setAttribute('data-aue-resource', `urn:aemconnection:${fragmentPath}`);
+  block.setAttribute('data-aue-label', 'Content Fragment');
+  block.setAttribute('data-aue-prop', 'cf-reference');
+}
+
 export default async function decorate(block) {
-  const link = block.querySelector('a');
-  const path = link ? link.getAttribute('href') : block.textContent.trim();
+  const path = getFragmentPath(block);
+
+  // instrument as an editable CF reference (enables "Open in CF Editor")
+  instrumentReference(block, path);
+
+  // render the referenced content (document-style include, if resolvable)
   const fragment = await loadFragment(path);
-  if (fragment) block.replaceChildren(...fragment.childNodes);
+  if (fragment) {
+    const content = document.createElement('div');
+    content.className = 'content-fragment-content';
+    content.append(...fragment.childNodes);
+    block.replaceChildren(content);
+  }
 }
