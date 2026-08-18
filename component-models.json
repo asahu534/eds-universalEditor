@@ -273,6 +273,17 @@
     ]
   },
   {
+    "id": "cf-reference-block",
+    "fields": [
+      {
+        "component": "aem-content-fragment",
+        "name": "cf-reference",
+        "label": "Content Fragment Reference",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {

@@ -48,6 +48,12 @@
     ]
   },
   {
+    "id": "cf-reference-block-section-filter",
+    "components": [
+      "cf-reference-block"
+    ]
+  },
+  {
     "id": "columns",
     "components": [
       "column"
