@@ -355,10 +355,7 @@
       {
         "component": "aem-content-fragment",
         "name": "cf-reference",
-        "label": "Content Fragment Reference",
-        "validation": {
-          "rootPath": "/content/dam/universal-editor-site/content-fragments/en/"
-        }
+        "label": "Content Fragment Reference"
       }
     ]
   },
