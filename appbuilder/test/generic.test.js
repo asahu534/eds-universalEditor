@@ -35,21 +35,40 @@ const upstreamPayload = {
   ]
 }
 
+// Valid shared-secret credentials for the team-proxy `x-api-key` gate.
+const AUTH = { SERVICE_API_KEY: 'test-key', __ow_headers: { 'x-api-key': 'test-key' } }
+
 describe('team-proxy', () => {
   test('main should be defined', () => {
     expect(action.main).toBeInstanceOf(Function)
   })
 
+  test('should return 401 when x-api-key header is missing', async () => {
+    const response = await action.main({ SERVICE_API_KEY: 'test-key' })
+    expect(response).toEqual({
+      error: { statusCode: 401, body: { error: 'unauthorized' } }
+    })
+    expect(fetch).not.toHaveBeenCalled()
+  })
+
+  test('should return 401 when x-api-key does not match', async () => {
+    const response = await action.main({ SERVICE_API_KEY: 'test-key', __ow_headers: { 'x-api-key': 'wrong' } })
+    expect(response).toEqual({
+      error: { statusCode: 401, body: { error: 'unauthorized' } }
+    })
+    expect(fetch).not.toHaveBeenCalled()
+  })
+
   test('should set logger to use LOG_LEVEL param', async () => {
     fetch.mockResolvedValue({ ok: true, json: () => Promise.resolve(upstreamPayload) })
-    await action.main({ LOG_LEVEL: 'fakeLevel' })
+    await action.main({ LOG_LEVEL: 'fakeLevel', ...AUTH })
     expect(Core.Logger).toHaveBeenCalledWith(expect.any(String), { level: 'fakeLevel' })
   })
 
   test('should return shaped results with cache header (no manual CORS)', async () => {
     fetch.mockResolvedValue({ ok: true, json: () => Promise.resolve(upstreamPayload) })
 
-    const response = await action.main({})
+    const response = await action.main({ ...AUTH })
 
     expect(response.statusCode).toBe(200)
     expect(response.headers['Cache-Control']).toMatch(/max-age=\d+/)
@@ -61,26 +80,29 @@ describe('team-proxy', () => {
         name: 'Ada Lovelace',
         title: 'London, UK',
         email: 'ada@example.com',
-        picture: 'https://img/large.jpg'
+        picture: 'https://img/large.jpg',
+        hasPhoto: true,
+        initials: 'AL',
+        alt: 'Photo of Ada Lovelace'
       }]
     })
   })
 
   test('should default to 12 results when parameter is omitted', async () => {
     fetch.mockResolvedValue({ ok: true, json: () => Promise.resolve({ results: [] }) })
-    await action.main({})
+    await action.main({ ...AUTH })
     expect(fetch).toHaveBeenCalledWith(expect.stringContaining('results=12'))
   })
 
   test('should cap results parameter at 50', async () => {
     fetch.mockResolvedValue({ ok: true, json: () => Promise.resolve({ results: [] }) })
-    await action.main({ results: '9999' })
+    await action.main({ results: '9999', ...AUTH })
     expect(fetch).toHaveBeenCalledWith(expect.stringContaining('results=50'))
   })
 
   test('should reject non-numeric results and fall back to default', async () => {
     fetch.mockResolvedValue({ ok: true, json: () => Promise.resolve({ results: [] }) })
-    await action.main({ results: 'not-a-number' })
+    await action.main({ results: 'not-a-number', ...AUTH })
     expect(fetch).toHaveBeenCalledWith(expect.stringContaining('results=12'))
   })
 
@@ -95,7 +117,7 @@ describe('team-proxy', () => {
     const fakeError = new Error('network down')
     fetch.mockRejectedValue(fakeError)
 
-    const response = await action.main({})
+    const response = await action.main({ ...AUTH })
 
     expect(response).toEqual({
       error: {
@@ -109,7 +131,7 @@ describe('team-proxy', () => {
   test('should return 500 when upstream responds with non-2xx', async () => {
     fetch.mockResolvedValue({ ok: false, status: 503 })
 
-    const response = await action.main({})
+    const response = await action.main({ ...AUTH })
 
     expect(response).toEqual({
       error: {

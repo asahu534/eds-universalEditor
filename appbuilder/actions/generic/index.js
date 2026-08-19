@@ -9,7 +9,7 @@
 
 const fetch = require('node-fetch')
 const { Core } = require('@adobe/aio-sdk')
-const { errorResponse, stringParameters } = require('../utils')
+const { errorResponse, isAuthorized, stringParameters } = require('../utils')
 
 const UPSTREAM = 'https://randomuser.me/api/'
 const DEFAULT_RESULTS = 12
@@ -57,6 +57,11 @@ async function main (params) {
     // Adobe I/O Runtime auto-injects CORS headers on web actions; we return no body/headers here.
     if (params.__ow_method === 'options') {
       return { statusCode: 204 }
+    }
+
+    // Shared-secret gate: the JSON2HTML worker sends `x-api-key` (see tools/json2html/partners-config.json).
+    if (!isAuthorized(params)) {
+      return errorResponse(401, 'unauthorized', logger)
     }
 
     const results = parseResults(params.results)

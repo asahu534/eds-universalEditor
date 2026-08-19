@@ -12,6 +12,7 @@ application:
             runtime: nodejs:22
             inputs:
               LOG_LEVEL: debug
+              SERVICE_API_KEY: $SERVICE_API_KEY
             annotations:
               require-adobe-auth: false
               final: true

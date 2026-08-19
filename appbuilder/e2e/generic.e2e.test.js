@@ -11,11 +11,11 @@ const namespace = Config.get('runtime.namespace')
 const hostname = Config.get('cna.hostname') || 'adobeioruntime.net'
 const packagejson = JSON.parse(fs.readFileSync('package.json').toString())
 const runtimePackage = 'appbuilder'
-const actionUrl = `https://${namespace}.${hostname}/api/v1/web/${runtimePackage}/generic`
+const actionUrl = `https://${namespace}.${hostname}/api/v1/web/${runtimePackage}/team-proxy`
 
-// The deployed actions are secured with the `require-adobe-auth` annotation.
-// If the authorization header is missing, Adobe I/O Runtime returns with a 401 before the action is executed.
-test('returns a 401 when missing Authorization header', async () => {
+// The team-proxy action is gated by a shared `x-api-key` secret (see actions/generic/index.js).
+// Without the header the action returns 401 before proxying the upstream feed.
+test('returns a 401 when missing x-api-key header', async () => {
   const res = await fetch(actionUrl)
   expect(res).toEqual(expect.objectContaining({
     status: 401
