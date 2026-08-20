@@ -4,6 +4,8 @@
 
 /* This file exposes some common utilities for your actions */
 
+const crypto = require('crypto')
+
 /**
  *
  * Returns a log ready string of the action input parameters.
@@ -113,6 +115,30 @@ function getBearerToken (params) {
   }
   return undefined
 }
+
+/**
+ *
+ * Validates the `x-api-key` request header against the action's `SERVICE_API_KEY` input
+ * using a constant-time comparison to avoid timing attacks.
+ *
+ * @param {object} params action input parameters.
+ *
+ * @returns {boolean} true when the provided key matches the configured secret.
+ *
+ */
+function isAuthorized (params) {
+  const expected = params.SERVICE_API_KEY
+  const provided = params.__ow_headers && params.__ow_headers['x-api-key']
+  if (!expected || !provided) {
+    return false
+  }
+  const expectedBuf = Buffer.from(String(expected))
+  const providedBuf = Buffer.from(String(provided))
+  if (expectedBuf.length !== providedBuf.length) {
+    return false
+  }
+  return crypto.timingSafeEqual(expectedBuf, providedBuf)
+}
 /**
  *
  * Returns an error response object and attempts to log.info the status code and error message
@@ -144,6 +170,7 @@ function errorResponse (statusCode, message, logger) {
 module.exports = {
   errorResponse,
   getBearerToken,
+  isAuthorized,
   stringParameters,
   checkMissingRequestInputs
 }
