@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{title}}</title>
+</head>
+<body>
+<header></header>
+<main>
+    <div>
+        <h1>{{title}}</h1>
+        <p>{{description}}</p>
+    </div>
+    <div class="cards">
+        <h2>Posts</h2>
+        <ul>
+            {{#posts}}
+            <li>
+                {{userId}}{{id}}{{title}}{{body}}
+            </li>
+            {{/posts}}
+        </ul>
+    </div>
+    <div>
+        <p>Created by <strong>{{author.name}}</strong></p>
+        <p>{{author.role}}</p>
+    </div>
+</main>
+<footer></footer>
+</body>
+</html>

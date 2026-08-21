@@ -1,0 +1,10 @@
+[
+  {
+    "path": "/partners",
+    "endpoint": "https://291222-edsuniversaleditor-stage.adobeio-static.net/api/v1/web/appbuilder/team-proxy?results=12",
+    "template": "/templates/partners.html",
+    "headers": {
+      "X-API-Key": "<SERVICE_API_KEY_PLACEHOLDER>"
+    }
+  }
+]

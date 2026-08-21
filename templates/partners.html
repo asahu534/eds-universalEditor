@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Our Partners</title>
+    <meta name="description" content="Meet the people behind our partner network.">
+  </head>
+  <body>
+    <main>
+      <div>
+        <h2>Our partners</h2>
+        <div class="partners">
+          {{#results}}
+          <div>
+            <div>{{#hasPhoto}}<picture><img src="{{picture}}" alt="{{alt}}"></picture>{{/hasPhoto}}{{^hasPhoto}}{{initials}}{{/hasPhoto}}</div>
+            <div>{{name}}</div>
+            <div>{{title}}</div>
+            <div>{{email}}</div>
+          </div>
+          {{/results}}
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
