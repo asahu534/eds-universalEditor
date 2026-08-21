@@ -30,7 +30,7 @@ export default function decorate(block) {
     }
 
     // Redirect
-    window.location.href = `/search.html?q=${encodeURIComponent(navSearchQuery)}`;
+    window.location.href = `/search?q=${encodeURIComponent(navSearchQuery)}`;
   }
 
   // Search icon click

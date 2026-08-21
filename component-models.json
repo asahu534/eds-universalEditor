@@ -502,6 +502,27 @@
     ]
   },
   {
+    "id": "search-results",
+    "fields": [
+      {
+        "component": "text",
+        "name": "heading",
+        "label": "Heading",
+        "description": "Optional heading shown above the results",
+        "valueType": "string",
+        "value": "Search Results"
+      },
+      {
+        "component": "text",
+        "name": "emptyMessage",
+        "label": "No-query Message",
+        "description": "Message shown when no search term is provided",
+        "valueType": "string",
+        "value": "Enter a search term to see results."
+      }
+    ]
+  },
+  {
     "id": "stat",
     "fields": [
       {
