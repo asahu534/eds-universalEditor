@@ -19,30 +19,7 @@
   "models": [
     {
       "id": "partners",
-      "fields": [
-        {
-          "component": "text",
-          "name": "endpoint",
-          "label": "API Endpoint",
-          "description": "URL of the team-proxy AppBuilder action returning { results: [...] }",
-          "valueType": "string",
-          "value": "https://291222-edsuniversaleditor-stage.adobeio-static.net/api/v1/web/appbuilder/team-proxy"
-        },
-        {
-          "component": "text",
-          "name": "heading",
-          "label": "Heading",
-          "valueType": "string",
-          "value": "Our partners"
-        },
-        {
-          "component": "text",
-          "name": "limit",
-          "label": "Maximum items (0 = all)",
-          "valueType": "number",
-          "value": "0"
-        }
-      ]
+      "fields": []
     }
   ],
   "filters": []
