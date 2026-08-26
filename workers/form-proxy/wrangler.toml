@@ -1,0 +1,19 @@
+name = "form-proxy"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# ── Placeholder mode ─────────────────────────────────────────────
+# "true"  → uses the built-in fake auth + fake API (no real creds needed).
+# "false" → uses AUTH_URL / API_URL below and the CLIENT_ID / CLIENT_SECRET
+#           secrets you set with `wrangler secret put`.
+[vars]
+USE_PLACEHOLDER = "true"
+
+# When you switch to a real API, uncomment and fill these, then set
+# USE_PLACEHOLDER = "false" above:
+# AUTH_URL = "https://your-auth-server/oauth/token"
+# API_URL  = "https://your-api/records"
+
+# Secrets are NOT stored here. Set them from your machine:
+#   wrangler secret put CLIENT_ID
+#   wrangler secret put CLIENT_SECRET

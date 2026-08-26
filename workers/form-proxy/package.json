@@ -1,0 +1,13 @@
+{
+  "name": "form-proxy",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Middleman Worker for protected form submissions (auth + token exchange)",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3"
+  }
+}
