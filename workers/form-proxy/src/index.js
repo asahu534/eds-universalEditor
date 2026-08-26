@@ -19,7 +19,7 @@
  */
 
 // Only this origin may call the Worker. Lock this to your site.
-const ALLOWED_ORIGIN = 'https://main--eds-universaleditor--asahu534.aem.live';
+const ALLOWED_ORIGIN = /^https:\/\/[a-z0-9-]+--eds-universaleditor--asahu534\.aem\.(page|live)$/;
 
 function corsHeaders(origin) {
   return {
