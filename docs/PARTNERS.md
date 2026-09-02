@@ -51,6 +51,7 @@ matches the Mustache template.
 
 ---
 
+
 ## 3. How a request travels
 
 ```mermaid
