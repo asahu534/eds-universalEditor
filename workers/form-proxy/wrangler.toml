@@ -1,0 +1,16 @@
+name = "form-proxy"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# ── Placeholder mode ─────────────────────────────────────────────
+# "true"  → uses the built-in fake auth + fake API (no real creds needed).
+# "false" → calls API_URL below with the API_TOKEN secret you set with
+#           `wrangler secret put API_TOKEN`.
+[vars]
+USE_PLACEHOLDER = "false"
+
+# Real API (MockerAPI bearer-protected mock endpoint).
+API_URL = "https://free.mockerapi.com/mock/fc11ad36-31f0-458e-b4d7-323c2e1c38d5"
+
+# Secret is NOT stored here. Set it from your machine:
+#   wrangler secret put API_TOKEN
