@@ -18,12 +18,19 @@
  *   3. Set USE_PLACEHOLDER = "false" in wrangler.toml.
  */
 
-// Only this origin may call the Worker. Lock this to your site.
-const ALLOWED_ORIGIN = /^https:\/\/[a-z0-9-]+--eds-universaleditor--asahu534\.aem\.(page|live)$/;
+// Only these origins may call the Worker. Lock these to your site (+ localhost for dev).
+const ALLOWED_ORIGINS = [
+  /^https:\/\/[a-z0-9-]+--eds-universaleditor--asahu534\.aem\.(page|live)$/,
+  /^http:\/\/localhost:3000$/,
+];
+
+function isAllowedOrigin(origin) {
+  return ALLOWED_ORIGINS.some((re) => re.test(origin));
+}
 
 function corsHeaders(origin) {
   return {
-    'Access-Control-Allow-Origin': origin === ALLOWED_ORIGIN ? origin : '',
+    'Access-Control-Allow-Origin': isAllowedOrigin(origin) ? origin : '',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     Vary: 'Origin',
@@ -48,6 +55,11 @@ function isValidEmail(email) {
 async function getAccessToken(env) {
   if (env.USE_PLACEHOLDER !== 'false') {
     return `placeholder-token-${env.CLIENT_ID || 'demo'}`;
+  }
+
+  // Static-token APIs (a pre-issued Bearer token) skip the OAuth exchange.
+  if (env.API_TOKEN) {
+    return env.API_TOKEN;
   }
 
   const res = await fetch(env.AUTH_URL, {
@@ -83,7 +95,9 @@ async function callApi(env, token, payload) {
     body: JSON.stringify(payload),
   });
   if (!res.ok) throw new Error(`API call failed: HTTP ${res.status}`);
-  return { ok: true, id: (await res.json()).id };
+  // Upstream may not return an id; fall back so the browser still gets a ref.
+  const data = await res.json().catch(() => ({}));
+  return { ok: true, id: data.id || data.timestamp || `ref-${Date.now()}` };
 }
 
 export default {
@@ -99,7 +113,7 @@ export default {
     if (request.method !== 'POST') {
       return json({ ok: false, error: 'Method not allowed' }, 405, origin);
     }
-    if (origin !== ALLOWED_ORIGIN) {
+    if (!isAllowedOrigin(origin)) {
       return json({ ok: false, error: 'Forbidden' }, 403, origin);
     }
 

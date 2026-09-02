@@ -1,7 +1,7 @@
 // The Worker URL is the "middleman" that holds the secret and calls the real API.
 // Replace this with your deployed Cloudflare Worker URL, or set it in the first
 // block row so authors/editors can change it without touching code.
-const DEFAULT_ENDPOINT = 'https://form-proxy.arunima-sahu.workers.dev';
+const DEFAULT_ENDPOINT = 'https://form-proxy.form-proxy.workers.dev';
 
 /**
  * Reads optional configuration from the block's rows.
