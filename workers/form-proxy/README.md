@@ -5,7 +5,7 @@ here; this Worker holds the secret credentials, exchanges them for a
 short-lived token, calls the protected API, and returns a clean result.
 
 ```
-contact-form block (browser)  →  form-proxy Worker  →  external API
+contact-us block (browser)  →  form-proxy Worker  →  external API
         no secrets                holds the secret
 ```
 
@@ -38,7 +38,7 @@ You need a (free) Cloudflare account and to be logged in (`wrangler login`).
 
 ## Wire the form to it
 
-In `blocks/contact-form/contact-form.js`, set `DEFAULT_ENDPOINT` to your
+In `blocks/contact-us/contact-us.js`, set `DEFAULT_ENDPOINT` to your
 deployed Worker URL (or set it in the block's first row).
 
 Also update `ALLOWED_ORIGIN` in `src/index.js` to your site's origin so only

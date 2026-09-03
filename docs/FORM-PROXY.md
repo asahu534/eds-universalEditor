@@ -1,4 +1,4 @@
-# Contact Form → Edge Worker → Authenticated API
+# Contact Us Form → Edge Worker → Authenticated API
 
 This doc explains the **contact form submission** feature: what it is, how a
 submission travels from the browser to a protected API and back, every design
@@ -9,7 +9,7 @@ change if the Worker is ever moved to a different Cloudflare account.
 
 ## 1. What the feature is
 
-A `contact-form` block collects Name / Email / Message and submits it to a
+A `contact-us` block collects Name / Email / Message and submits it to a
 **Cloudflare Worker** (`form-proxy`). The Worker is a server-side "middleman"
 that holds a secret API token, attaches it to the request, and calls a
 **protected (Bearer-authenticated) API** on the visitor's behalf. The browser
@@ -20,7 +20,7 @@ For this POC the protected API is a **MockerAPI** endpoint
 prove the secure end-to-end flow without a real backend.
 
 ```
-contact-form block (browser)   →   form-proxy Worker   →   authenticated API
+contact-us block (browser)   →   form-proxy Worker   →   authenticated API
         no secrets                   holds the token          (MockerAPI mock)
 ```
 
@@ -30,7 +30,7 @@ contact-form block (browser)   →   form-proxy Worker   →   authenticated API
 
 ```mermaid
 sequenceDiagram
-    participant V as Visitor Browser<br/>(contact-form block)
+    participant V as Visitor Browser<br/>(contact-us block)
     participant W as form-proxy Worker<br/>(*.workers.dev)
     participant API as Protected API<br/>(MockerAPI mock)
 
@@ -84,12 +84,12 @@ sequenceDiagram
 
 ## 4. Files involved / changes made
 
-| File | Role | Change |
-| --- | --- | --- |
-| [workers/form-proxy/src/index.js](../workers/form-proxy/src/index.js) | The Worker (guardrails, auth, API call) | Fixed CORS origin matching (`ALLOWED_ORIGINS` + `isAllowedOrigin` using `.test()`), added `localhost:3000`, added static-token path in `getAccessToken()`, made `callApi()` id-parsing tolerant. |
-| [workers/form-proxy/wrangler.toml](../workers/form-proxy/wrangler.toml) | Worker config (vars) | `USE_PLACEHOLDER="false"`, `API_URL` set to the MockerAPI endpoint. |
-| [blocks/contact-form/contact-form.js](../blocks/contact-form/contact-form.js) | The block decorator | `DEFAULT_ENDPOINT` set to the deployed Worker URL. |
-| [drafts/contact.plain.html](../drafts/contact.plain.html) | Local test page | New draft with the `contact-form` block wired to the Worker. |
+| File                                                                    | Role | Change                                                                                                                                                                                           |
+|-------------------------------------------------------------------------| --- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [workers/form-proxy/src/index.js](../workers/form-proxy/src/index.js)   | The Worker (guardrails, auth, API call) | Fixed CORS origin matching (`ALLOWED_ORIGINS` + `isAllowedOrigin` using `.test()`), added `localhost:3000`, added static-token path in `getAccessToken()`, made `callApi()` id-parsing tolerant. |
+| [workers/form-proxy/wrangler.toml](../workers/form-proxy/wrangler.toml) | Worker config (vars) | `USE_PLACEHOLDER="false"`, `API_URL` set to the MockerAPI endpoint.                                                                                                                              |
+| [blocks/contact-us/contact-us.js](../blocks/contact-us/contact-us.js)   | The block decorator | `DEFAULT_ENDPOINT` set to the deployed Worker URL.                                                                                                                                               |
+| [drafts/contact.plain.html](../drafts/contact.plain.html)               | Local test page | New draft with the `contact-us` block wired to the Worker.                                                                                                                                       |
 
 Secrets / config **not** in Git:
 
@@ -155,12 +155,12 @@ You can also confirm the API itself enforces the token — hitting `API_URL`
 
    ```powershell
    git add workers/form-proxy/src/index.js workers/form-proxy/wrangler.toml `
-           blocks/contact-form/contact-form.js drafts/contact.plain.html
-   git commit -m "Connect contact-form worker to authenticated MockerAPI endpoint"
+           blocks/contact-us/contact-us.js drafts/contact.plain.html
+   git commit -m "Connect contact-us worker to authenticated MockerAPI endpoint"
    git push
    ```
 
-2. Add the `contact-form` block to a content page (or preview the draft), then
+2. Add the `contact-us` block to a content page (or preview the draft), then
    open the branch preview:
 
    ```
@@ -205,7 +205,7 @@ API needs to change unless the Worker URL changes (it will).
    `https://form-proxy.<new-subdomain>.workers.dev`).
 
 5. **Update the block endpoint** — set `DEFAULT_ENDPOINT` in
-   [blocks/contact-form/contact-form.js](../blocks/contact-form/contact-form.js)
+   [blocks/contact-us/contact-us.js](../blocks/ccontact-us/contact-us.js)
    to the new Worker URL (or override it per page via the block's first row).
 
 6. **Update the origin allowlist if the site changed** — `ALLOWED_ORIGINS` in

@@ -350,7 +350,7 @@
     ]
   },
   {
-    "id": "contactform",
+    "id": "contactus",
     "fields": [
       {
         "component": "text",
@@ -502,29 +502,6 @@
         "name": "buttonText",
         "label": "Button Text",
         "valueType": "string",
-        "value": ""
-      }
-    ]
-  },
-  {
-    "id": "partners",
-    "fields": []
-  },
-  {
-    "id": "quote",
-    "fields": [
-      {
-        "component": "richtext",
-        "name": "quote",
-        "value": "",
-        "label": "Quote",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "author",
-        "label": "Author",
         "value": ""
       }
     ]
