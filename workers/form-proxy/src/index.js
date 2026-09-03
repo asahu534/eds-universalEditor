@@ -2,7 +2,7 @@
  * Form-proxy Worker — the "middleman" for protected form submissions.
  *
  * Flow:
- *   Browser (contact-form block)  →  THIS Worker  →  external API
+ *   Browser (contact-us block)  →  THIS Worker  →  external API
  *
  * The Worker holds the secret credentials (never the browser), exchanges them
  * for a short-lived access token, then calls the protected API on the user's

@@ -13,7 +13,15 @@ they are missing after a clone. Recreate them once per machine:
 4. Fill in the values. The fastest way for the Adobe I/O Runtime values is:
    - `aio login`
    - `aio app use` — pick your Org > Project > Workspace; this generates `.aio` /
-     `console.json` and can populate the `AIO_runtime_*` values in `.env`.
+   - If `aio app use` shows 
+             You are currently in:
+             1. Org: <no org selected>
+             2. Project: <no project selected>
+             3. Workspace: <no workspace selected>
+   - Run the following commands to select your org, project, and workspace:
+        - `aio console org select`
+        - `aio console project select `
+        - `aio console workspace select`
 5. Add the action secrets (`SERVICE_API_KEY`, `CRM_API_TOKEN`, `SLACK_WEBHOOK_URL`) —
    ask a teammate or your secrets manager for these; they are never stored in git.
 6. `aio app run`

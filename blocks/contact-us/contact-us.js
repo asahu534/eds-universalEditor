@@ -20,9 +20,9 @@ function readConfig(block) {
 
 function field(name, label, type, required) {
   const wrapper = document.createElement('div');
-  wrapper.className = 'contact-form-field';
+  wrapper.className = 'contact-us-field';
 
-  const id = `contact-form-${name}`;
+  const id = `contact-us-${name}`;
   const labelEl = document.createElement('label');
   labelEl.setAttribute('for', id);
   labelEl.textContent = label;
@@ -45,7 +45,7 @@ export default async function decorate(block) {
   block.textContent = '';
 
   const form = document.createElement('form');
-  form.className = 'contact-form-form';
+  form.className = 'contact-us-form';
   form.noValidate = true;
 
   form.append(
@@ -59,7 +59,7 @@ export default async function decorate(block) {
   const honeypot = document.createElement('input');
   honeypot.type = 'text';
   honeypot.name = 'company';
-  honeypot.className = 'contact-form-hp';
+  honeypot.className = 'contact-us-hp';
   honeypot.tabIndex = -1;
   honeypot.autocomplete = 'off';
   honeypot.setAttribute('aria-hidden', 'true');
@@ -67,12 +67,12 @@ export default async function decorate(block) {
 
   const submit = document.createElement('button');
   submit.type = 'submit';
-  submit.className = 'contact-form-submit';
+  submit.className = 'contact-us-submit';
   submit.textContent = submitLabel;
   form.append(submit);
 
   const status = document.createElement('p');
-  status.className = 'contact-form-status';
+  status.className = 'contact-us-status';
   status.setAttribute('role', 'status');
   status.setAttribute('aria-live', 'polite');
   form.append(status);
@@ -80,7 +80,7 @@ export default async function decorate(block) {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     status.textContent = '';
-    status.className = 'contact-form-status';
+    status.className = 'contact-us-status';
 
     // Bot caught by honeypot — pretend success, do nothing.
     if (honeypot.value) {
