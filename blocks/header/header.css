@@ -283,7 +283,7 @@ header nav .nav-sections ul > li > ul {
 
   header nav .nav-sections .nav-drop[aria-expanded='true']::after {
     transform: translateY(-50%) rotate(180deg);
-}
+  }
 
   header nav .nav-sections ul {
     display: flex;
