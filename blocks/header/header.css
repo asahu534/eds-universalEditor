@@ -161,6 +161,10 @@ header nav[aria-expanded='true'] .nav-search {
 }
 
 /* brand */
+header nav .nav-sections .default-content-wrapper {
+  display: block;
+}
+
 .header .nav-brand {
   flex: 0 0 50px;
   width: 50px;
@@ -212,10 +216,6 @@ header nav .nav-sections {
   flex: 1 1 auto;
   display: none;
   visibility: hidden;
-}
-
-header nav .nav-sections .default-content-wrapper {
-  display: block;
 }
 
 header nav[aria-expanded='true'] .nav-sections {
