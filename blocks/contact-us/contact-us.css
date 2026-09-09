@@ -2,6 +2,7 @@
   display: grid;
   gap: var(--spacing-m);
   max-width: 560px;
+  margin: var(--spacing-s) var(--spacing-xs);
 }
 
 .contact-us .contact-us-field {
