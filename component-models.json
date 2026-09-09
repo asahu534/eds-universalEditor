@@ -155,6 +155,10 @@
     ]
   },
   {
+    "id": "breadcrumbs",
+    "fields": []
+  },
+  {
     "id": "accordionItem",
     "fields": [
       {
