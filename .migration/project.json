@@ -1,0 +1,12 @@
+{
+  "sites": {
+    "eds-universaleditor": {
+      "previewOrg": "asahu534",
+      "previewSite": "eds-universaleditor",
+      "aemSitePath": "/content/universal-editor-site",
+      "aemAssetsFolderPath": "/content/dam/universal-editor-site",
+      "aemSiteName": "universal-editor-site",
+      "aemSiteTitle": "ASahu - Universal Editor Site"
+    }
+  }
+}
