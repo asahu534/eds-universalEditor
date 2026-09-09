@@ -350,6 +350,34 @@
     ]
   },
   {
+    "id": "contactus",
+    "fields": [
+      {
+        "component": "text",
+        "name": "endpoint",
+        "label": "Worker Endpoint",
+        "description": "URL of the Cloudflare Worker that receives the submission (never the protected API directly)",
+        "valueType": "string",
+        "value": "https://form-proxy.example.workers.dev"
+      },
+      {
+        "component": "text",
+        "name": "submitLabel",
+        "label": "Submit Button Label",
+        "valueType": "string",
+        "value": "Send message"
+      },
+      {
+        "component": "text",
+        "name": "successMessage",
+        "label": "Success Message",
+        "description": "Shown to the visitor after a successful submission",
+        "valueType": "string",
+        "value": "Thanks — your message has been sent."
+      }
+    ]
+  },
+  {
     "id": "cta",
     "fields": [
       {
@@ -474,29 +502,6 @@
         "name": "buttonText",
         "label": "Button Text",
         "valueType": "string",
-        "value": ""
-      }
-    ]
-  },
-  {
-    "id": "partners",
-    "fields": []
-  },
-  {
-    "id": "quote",
-    "fields": [
-      {
-        "component": "richtext",
-        "name": "quote",
-        "value": "",
-        "label": "Quote",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "author",
-        "label": "Author",
         "value": ""
       }
     ]

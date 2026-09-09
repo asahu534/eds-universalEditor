@@ -1,0 +1,88 @@
+.contact-us .contact-us-form {
+  display: grid;
+  gap: var(--spacing-m);
+  max-width: 560px;
+  margin: var(--spacing-s) var(--spacing-xs);
+}
+
+.contact-us .contact-us-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.contact-us .contact-us-field label {
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  color: var(--color-on-surface);
+}
+
+.contact-us .contact-us-field input,
+.contact-us .contact-us-field textarea {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  color: var(--color-on-surface);
+  padding: var(--spacing-xs) var(--spacing-s);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-s);
+  background-color: var(--color-surface);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-us .contact-us-field textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.contact-us .contact-us-field input:focus,
+.contact-us .contact-us-field textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgb(59 99 251 / 15%);
+}
+
+/* Honeypot — visually hidden but present in the DOM for bots to trip on. */
+.contact-us .contact-us-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.contact-us .contact-us-submit {
+  justify-self: start;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  color: var(--color-accent-contrast);
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-s);
+  padding: var(--spacing-xs) var(--spacing-l);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.contact-us .contact-us-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.contact-us .contact-us-submit:hover:not(:disabled) {
+  background-color: var(--color-accent-hover);
+}
+
+.contact-us .contact-us-status {
+  margin: 0;
+  font-size: var(--body-font-size-xs);
+  min-height: 1.2em;
+}
+
+.contact-us .contact-us-status.success {
+  color: #1a7f37;
+}
+
+.contact-us .contact-us-status.error {
+  color: #c9252d;
+}
