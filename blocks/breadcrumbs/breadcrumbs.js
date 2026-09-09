@@ -1,10 +1,10 @@
 export default function decorate(block) {
-  console.log('Breadcrumbs block loaded');
+  console.log('Breadcrumb block loaded');
 
   block.innerHTML = `
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <ol>
-        <li>Breadcrumbs</li>
+        <li>Breadcrumb</li>
       </ol>
     </nav>
   `;
