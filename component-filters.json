@@ -22,13 +22,13 @@
       "fragment",
       "quote",
       "accordion",
-      "breadcrumb",
       "carousel",
       "tabs",
       "articleslist",
       "commentsfeed",
       "partners",
-      "contactus"
+      "contactus",
+      "breadcrumb"
     ]
   },
   {
