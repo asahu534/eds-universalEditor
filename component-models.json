@@ -211,6 +211,18 @@
     ]
   },
   {
+    "id": "breadcrumb",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "parentPage",
+        "label": "Parent Page",
+        "description": "Select the parent page for this breadcrumb.",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
