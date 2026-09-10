@@ -40,6 +40,7 @@ application:
               TEAMS_WEBHOOK_URL: $TEAMS_WEBHOOK_URL
               SITE_LIVE_HOST: $SITE_LIVE_HOST
               SERVICE_API_KEY: $SERVICE_API_KEY
+              REQUIRED_TAG: $REQUIRED_TAG
             annotations:
               # Not Adobe-authenticated: the aem.live publish webhook cannot send IMS
               # tokens. Access is gated by the SERVICE_API_KEY shared secret in main().

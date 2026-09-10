@@ -36,6 +36,31 @@ function buildLiveUrl (event, siteLiveHost) {
   return `https://${host}${path}`
 }
 
+const PAGE_EXTENSIONS = ['.md', '.html']
+
+// `/faq.md` -> `/faq`; extensionless paths are left as-is.
+function toWebPath (path) {
+  const ext = PAGE_EXTENSIONS.find((e) => path.endsWith(e))
+  return ext ? path.slice(0, -ext.length) : path
+}
+
+// Fetches the published page and reports whether its cq-tags meta contains requiredTag.
+async function pageHasRequiredTag (path, siteLiveHost, requiredTag) {
+  const host = siteLiveHost.replace(/^https?:\/\//, '').replace(/\/$/, '')
+  const webPath = toWebPath(path)
+  const url = `https://${host}${webPath.startsWith('/') ? '' : '/'}${webPath}`
+  const res = await fetch(url)
+  if (!res.ok) {
+    return false
+  }
+  const html = await res.text()
+  const match = html.match(/<meta[^>]+name=["']cq-tags["'][^>]+content=["']([^"']*)["']/i)
+  if (!match) {
+    return false
+  }
+  return match[1].split(',').map((tag) => tag.trim()).includes(requiredTag)
+}
+
 function buildSlackMessage (event) {
   return {
     text: `:rocket: *${event.action}* — \`${event.path || '(no path)'}\` published by *${event.user}* (priority: ${event.priority || 'normal'})`
@@ -109,6 +134,27 @@ async function main (params) {
     const event = extractEvent(params)
     if (!event.path) {
       return errorResponse(400, 'missing parameter(s) \'path\'', logger)
+    }
+
+    // Optional filter: when REQUIRED_TAG is configured, only notify publish events whose
+    // published page carries that cq-tags value (read from the live page). Unpublish
+    // events are ignored.
+    if (params.REQUIRED_TAG) {
+      if (event.action.toLowerCase().includes('unpublish')) {
+        return { statusCode: 200, body: { skipped: true, reason: 'unpublish-ignored' } }
+      }
+      let tagged = false
+      if (params.SITE_LIVE_HOST) {
+        try {
+          tagged = await pageHasRequiredTag(event.path, params.SITE_LIVE_HOST, params.REQUIRED_TAG)
+        } catch (error) {
+          logger.error(`tag check failed for path='${event.path}': ${error.message}`)
+        }
+      }
+      if (!tagged) {
+        logger.info(`skipping path='${event.path}' (required tag not present)`)
+        return { statusCode: 200, body: { skipped: true, reason: 'required-tag-not-present' } }
+      }
     }
 
     // Post to both targets independently so one failure does not suppress the other.

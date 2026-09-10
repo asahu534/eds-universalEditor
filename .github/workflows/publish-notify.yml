@@ -33,11 +33,16 @@ jobs:
           ACTION_URL: https://291222-edsuniversaleditor-stage.adobeioruntime.net/api/v1/web/appbuilder/publish-notifier
           SERVICE_API_KEY: ${{ secrets.SERVICE_API_KEY }}
         run: |
+          # Published pages always live at the AEM live host; derive it from the repo.
+          owner="${GITHUB_REPOSITORY%%/*}"
+          repo="${GITHUB_REPOSITORY#*/}"
+          SITE_LIVE_HOST="main--${repo,,}--${owner,,}.aem.live"
           body=$(jq -n \
             --arg path "$PUBLISH_PATH" \
             --arg user "$PUBLISHER" \
             --arg action "$EVENT_TYPE" \
-            '{path: $path, user: $user, action: $action, priority: "normal"}')
+            --arg siteLiveHost "$SITE_LIVE_HOST" \
+            '{path: $path, user: $user, action: $action, priority: "normal", SITE_LIVE_HOST: $siteLiveHost}')
           curl -sS -X POST "$ACTION_URL" \
             -H "content-type: application/json" \
             -H "x-api-key: $SERVICE_API_KEY" \

@@ -19,6 +19,9 @@ const action = require('./../actions/publish-events/index.js')
 const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/T000/B000/xxx'
 const TEAMS_WEBHOOK_URL = 'https://example.powerplatform.com/workflows/abc/triggers/manual/paths/invoke'
 const SERVICE_API_KEY = 'top-secret-token'
+const TAG_HOST = 'main--eds-universaleditor--asahu534.aem.live'
+const PRIORITY_TAG = 'universal-editor-site:priority/high'
+const TAG_PAGE_URL = `https://${TAG_HOST}/faq`
 
 beforeEach(() => {
   Core.Logger.mockClear()
@@ -30,6 +33,13 @@ beforeEach(() => {
 
 function callFor (url) {
   return fetch.mock.calls.find((c) => c[0] === url)
+}
+
+// Mocks the page fetch (TAG_PAGE_URL) with `html` (null => not ok) and webhooks with 200.
+function mockPage (html) {
+  fetch.mockImplementation((url) => (url === TAG_PAGE_URL
+    ? Promise.resolve({ ok: html !== null, text: () => Promise.resolve(html || '') })
+    : Promise.resolve({ ok: true })))
 }
 
 describe('publish-notifier', () => {
@@ -275,5 +285,80 @@ describe('publish-notifier', () => {
 
     expect(response.statusCode).toBe(200)
     expect(response.body.teams).toBe(true)
+  })
+
+  test('should notify when the required cq-tag is present on the page', async () => {
+    mockPage('<meta name="cq-tags" content="universal-editor-site:priority/high">')
+
+    const response = await action.main({
+      TEAMS_WEBHOOK_URL,
+      SITE_LIVE_HOST: TAG_HOST,
+      REQUIRED_TAG: PRIORITY_TAG,
+      path: '/faq.md',
+      action: 'resource-published'
+    })
+
+    expect(response.statusCode).toBe(200)
+    expect(response.body.teams).toBe(true)
+    expect(callFor(TEAMS_WEBHOOK_URL)).toBeDefined()
+  })
+
+  test('should skip when the required cq-tag is absent', async () => {
+    mockPage('<meta name="cq-tags" content="universal-editor-site:category/news">')
+
+    const response = await action.main({
+      TEAMS_WEBHOOK_URL,
+      SITE_LIVE_HOST: TAG_HOST,
+      REQUIRED_TAG: PRIORITY_TAG,
+      path: '/faq.md',
+      action: 'resource-published'
+    })
+
+    expect(response).toEqual({ statusCode: 200, body: { skipped: true, reason: 'required-tag-not-present' } })
+    expect(callFor(TEAMS_WEBHOOK_URL)).toBeUndefined()
+  })
+
+  test('should match the required tag within a comma-separated cq-tags list', async () => {
+    mockPage('<meta name="cq-tags" content="universal-editor-site:category/news, universal-editor-site:priority/high">')
+
+    const response = await action.main({
+      TEAMS_WEBHOOK_URL,
+      SITE_LIVE_HOST: TAG_HOST,
+      REQUIRED_TAG: PRIORITY_TAG,
+      path: '/faq.md',
+      action: 'resource-published'
+    })
+
+    expect(response.body.teams).toBe(true)
+  })
+
+  test('should skip unpublish events when REQUIRED_TAG is set (no page fetch)', async () => {
+    fetch.mockResolvedValue({ ok: true })
+
+    const response = await action.main({
+      TEAMS_WEBHOOK_URL,
+      SITE_LIVE_HOST: TAG_HOST,
+      REQUIRED_TAG: PRIORITY_TAG,
+      path: '/faq.md',
+      action: 'resource-unpublished'
+    })
+
+    expect(response).toEqual({ statusCode: 200, body: { skipped: true, reason: 'unpublish-ignored' } })
+    expect(fetch).not.toHaveBeenCalled()
+  })
+
+  test('should skip when the page fetch fails', async () => {
+    mockPage(null)
+
+    const response = await action.main({
+      TEAMS_WEBHOOK_URL,
+      SITE_LIVE_HOST: TAG_HOST,
+      REQUIRED_TAG: PRIORITY_TAG,
+      path: '/faq.md',
+      action: 'resource-published'
+    })
+
+    expect(response.body.skipped).toBe(true)
+    expect(callFor(TEAMS_WEBHOOK_URL)).toBeUndefined()
   })
 })
