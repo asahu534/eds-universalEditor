@@ -16,7 +16,6 @@ jest.mock('node-fetch')
 const fetch = require('node-fetch')
 const action = require('./../actions/publish-events/index.js')
 
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/T000/B000/xxx'
 const TEAMS_WEBHOOK_URL = 'https://example.powerplatform.com/workflows/abc/triggers/manual/paths/invoke'
 const SERVICE_API_KEY = 'top-secret-token'
 const TAG_HOST = 'main--eds-universaleditor--asahu534.aem.live'
@@ -52,14 +51,14 @@ describe('publish-notifier', () => {
     expect(response).toEqual({
       error: {
         statusCode: 400,
-        body: { error: "missing parameter(s) 'SLACK_WEBHOOK_URL' or 'TEAMS_WEBHOOK_URL'" }
+        body: { error: "missing parameter(s) 'TEAMS_WEBHOOK_URL'" }
       }
     })
     expect(fetch).not.toHaveBeenCalled()
   })
 
   test('should return 400 when path is missing', async () => {
-    const response = await action.main({ SLACK_WEBHOOK_URL, priority: 'high' })
+    const response = await action.main({ TEAMS_WEBHOOK_URL, priority: 'high' })
     expect(response).toEqual({
       error: {
         statusCode: 400,
@@ -69,11 +68,10 @@ describe('publish-notifier', () => {
     expect(fetch).not.toHaveBeenCalled()
   })
 
-  test('should notify on non-high priority (no priority filter)', async () => {
+  test('should notify regardless of priority when no tag filter is set', async () => {
     fetch.mockResolvedValue({ ok: true })
 
     const response = await action.main({
-      SLACK_WEBHOOK_URL,
       TEAMS_WEBHOOK_URL,
       path: '/campaigns/foo',
       priority: 'low'
@@ -81,34 +79,9 @@ describe('publish-notifier', () => {
 
     expect(response).toEqual({
       statusCode: 200,
-      body: { notified: true, path: '/campaigns/foo', slack: true, teams: true }
-    })
-    expect(fetch).toHaveBeenCalledTimes(2)
-  })
-
-  test('should POST to Slack webhook for a direct payload', async () => {
-    fetch.mockResolvedValue({ ok: true })
-
-    const response = await action.main({
-      SLACK_WEBHOOK_URL,
-      path: '/campaigns/launch',
-      priority: 'HIGH',
-      user: 'alice',
-      action: 'publish'
-    })
-
-    expect(response).toEqual({
-      statusCode: 200,
-      body: { notified: true, path: '/campaigns/launch', slack: true }
+      body: { notified: true, path: '/campaigns/foo', teams: true }
     })
     expect(fetch).toHaveBeenCalledTimes(1)
-    const [url, opts] = callFor(SLACK_WEBHOOK_URL)
-    expect(url).toBe(SLACK_WEBHOOK_URL)
-    expect(opts.method).toBe('POST')
-    expect(opts.headers['Content-Type']).toBe('application/json')
-    const body = JSON.parse(opts.body)
-    expect(body.text).toContain('/campaigns/launch')
-    expect(body.text).toContain('alice')
   })
 
   test('should POST an Adaptive Card to Teams webhook', async () => {
@@ -147,26 +120,11 @@ describe('publish-notifier', () => {
     expect(card.actions).toBeUndefined()
   })
 
-  test('should post to both Slack and Teams when both are configured', async () => {
-    fetch.mockResolvedValue({ ok: true })
-
-    const response = await action.main({
-      SLACK_WEBHOOK_URL,
-      TEAMS_WEBHOOK_URL,
-      path: '/x',
-      priority: 'high'
-    })
-
-    expect(response.body).toEqual({ notified: true, path: '/x', slack: true, teams: true })
-    expect(callFor(SLACK_WEBHOOK_URL)).toBeDefined()
-    expect(callFor(TEAMS_WEBHOOK_URL)).toBeDefined()
-  })
-
   test('should unwrap CloudEvent `data` envelope', async () => {
     fetch.mockResolvedValue({ ok: true })
 
     const response = await action.main({
-      SLACK_WEBHOOK_URL,
+      TEAMS_WEBHOOK_URL,
       data: {
         path: '/pages/hero',
         priority: 'high',
@@ -176,37 +134,16 @@ describe('publish-notifier', () => {
 
     expect(response.statusCode).toBe(200)
     expect(response.body.notified).toBe(true)
-    const body = JSON.parse(callFor(SLACK_WEBHOOK_URL)[1].body)
-    expect(body.text).toContain('/pages/hero')
-    expect(body.text).toContain('bob')
+    const card = JSON.parse(callFor(TEAMS_WEBHOOK_URL)[1].body).attachments[0].content
+    const factValues = card.body.find((b) => b.type === 'FactSet').facts.map((f) => f.value)
+    expect(factValues).toContain('/pages/hero')
+    expect(factValues).toContain('bob')
   })
 
-  test('should return 200 with partial success when one webhook fails', async () => {
-    fetch.mockImplementation((url) => (url === SLACK_WEBHOOK_URL
-      ? Promise.resolve({ ok: false, status: 500 })
-      : Promise.resolve({ ok: true })))
-
-    const response = await action.main({
-      SLACK_WEBHOOK_URL,
-      TEAMS_WEBHOOK_URL,
-      path: '/x',
-      priority: 'high'
-    })
-
-    expect(response).toEqual({
-      statusCode: 200,
-      body: { notified: true, path: '/x', slack: false, teams: true }
-    })
-    expect(mockLoggerInstance.error).toHaveBeenCalledWith(
-      expect.stringContaining('slack notification failed')
-    )
-  })
-
-  test('should return 500 when all webhooks fail', async () => {
+  test('should return 500 when the Teams webhook responds with an error', async () => {
     fetch.mockResolvedValue({ ok: false, status: 500 })
 
     const response = await action.main({
-      SLACK_WEBHOOK_URL,
       TEAMS_WEBHOOK_URL,
       path: '/x',
       priority: 'high'
@@ -215,14 +152,16 @@ describe('publish-notifier', () => {
     expect(response).toEqual({
       error: { statusCode: 500, body: { error: 'server error' } }
     })
+    expect(mockLoggerInstance.error).toHaveBeenCalledWith(
+      expect.stringContaining('teams notification failed')
+    )
   })
 
-  test('should return 500 when the only webhook fetch rejects', async () => {
-    const fakeError = new Error('boom')
-    fetch.mockRejectedValue(fakeError)
+  test('should return 500 when the Teams webhook fetch rejects', async () => {
+    fetch.mockRejectedValue(new Error('boom'))
 
     const response = await action.main({
-      SLACK_WEBHOOK_URL,
+      TEAMS_WEBHOOK_URL,
       path: '/x',
       priority: 'high'
     })

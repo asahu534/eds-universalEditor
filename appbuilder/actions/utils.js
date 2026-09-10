@@ -42,7 +42,7 @@ function stringParameters (params) {
     }
   }
   // redact secret-bearing inputs from logs (webhook URLs carry a signature)
-  const secretKeys = ['SERVICE_API_KEY', 'CRM_API_TOKEN', 'SLACK_WEBHOOK_URL', 'TEAMS_WEBHOOK_URL']
+  const secretKeys = ['SERVICE_API_KEY', 'CRM_API_TOKEN', 'TEAMS_WEBHOOK_URL']
   secretKeys.forEach((key) => {
     if (paramsShallowCopy[key] !== undefined) {
       paramsShallowCopy[key] = '<hidden>'

@@ -2,8 +2,7 @@
  * publish-notifier action
  *
  * Invoked by an Adobe I/O Events subscription for AEM publish events (or manually
- * via curl for smoke tests). Posts a notification to Slack and/or Microsoft Teams
- * for every published page.
+ * via curl for smoke tests). Posts a Microsoft Teams notification for published pages.
  *
  * Deployed as `appbuilder/publish-notifier` (see app.config.yaml).
  *
@@ -59,12 +58,6 @@ async function pageHasRequiredTag (path, siteLiveHost, requiredTag) {
     return false
   }
   return match[1].split(',').map((tag) => tag.trim()).includes(requiredTag)
-}
-
-function buildSlackMessage (event) {
-  return {
-    text: `:rocket: *${event.action}* — \`${event.path || '(no path)'}\` published by *${event.user}* (priority: ${event.priority || 'normal'})`
-  }
 }
 
 // Teams "Workflows" webhooks expect an Adaptive Card wrapped in a message envelope.
@@ -125,10 +118,9 @@ async function main (params) {
       return errorResponse(401, 'unauthorized', logger)
     }
 
-    const slackUrl = params.SLACK_WEBHOOK_URL
     const teamsUrl = params.TEAMS_WEBHOOK_URL
-    if (!slackUrl && !teamsUrl) {
-      return errorResponse(400, "missing parameter(s) 'SLACK_WEBHOOK_URL' or 'TEAMS_WEBHOOK_URL'", logger)
+    if (!teamsUrl) {
+      return errorResponse(400, "missing parameter(s) 'TEAMS_WEBHOOK_URL'", logger)
     }
 
     const event = extractEvent(params)
@@ -157,32 +149,15 @@ async function main (params) {
       }
     }
 
-    // Post to both targets independently so one failure does not suppress the other.
-    const targets = []
-    if (slackUrl) {
-      targets.push({ name: 'slack', promise: postWebhook(slackUrl, buildSlackMessage(event)) })
-    }
-    if (teamsUrl) {
-      targets.push({ name: 'teams', promise: postWebhook(teamsUrl, buildTeamsMessage(event, params.SITE_LIVE_HOST)) })
-    }
-
-    const settled = await Promise.allSettled(targets.map((t) => t.promise))
-    const result = {}
-    settled.forEach((outcome, i) => {
-      const name = targets[i].name
-      result[name] = outcome.status === 'fulfilled'
-      if (outcome.status === 'rejected') {
-        logger.error(`${name} notification failed: ${outcome.reason && outcome.reason.message}`)
-      }
-    })
-
-    const anySucceeded = Object.values(result).some(Boolean)
-    if (!anySucceeded) {
+    try {
+      await postWebhook(teamsUrl, buildTeamsMessage(event, params.SITE_LIVE_HOST))
+    } catch (error) {
+      logger.error(`teams notification failed: ${error.message}`)
       return errorResponse(500, 'server error', logger)
     }
 
-    logger.info(`notified for path='${event.path}' ${JSON.stringify(result)}`)
-    return { statusCode: 200, body: { notified: true, path: event.path, ...result } }
+    logger.info(`notified for path='${event.path}'`)
+    return { statusCode: 200, body: { notified: true, path: event.path, teams: true } }
   } catch (error) {
     logger.error(error)
     return errorResponse(500, 'server error', logger)
