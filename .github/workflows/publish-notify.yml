@@ -1,0 +1,45 @@
+name: Publish Notify
+
+# Real publish/unpublish events come from AEM as repository_dispatch (see
+# https://www.aem.live/developer/github-actions) and, per GitHub, ONLY run from the
+# default branch. The push branch list below does NOT affect those events; it only
+# lets you test this workflow by pushing to the listed branches.
+on:
+  repository_dispatch:
+    types:
+      - resource-published
+      - resource-published-native
+      - resource-unpublished
+      - resource-unpublished-native
+  push:
+    branches:
+      - main
+      - develop
+      - feature/msteams-notification
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Teams via App Builder action
+        env:
+          # From the AEM event payload; falls back to test values on a push run.
+          PUBLISH_PATH: ${{ github.event.client_payload.path || '/ci-test-page' }}
+          PUBLISHER: ${{ github.event.client_payload.user || github.actor }}
+          EVENT_TYPE: ${{ github.event.action || github.event_name }}
+          ACTION_URL: https://291222-edsuniversaleditor-stage.adobeioruntime.net/api/v1/web/appbuilder/publish-notifier
+          SERVICE_API_KEY: ${{ secrets.SERVICE_API_KEY }}
+        run: |
+          body=$(jq -n \
+            --arg path "$PUBLISH_PATH" \
+            --arg user "$PUBLISHER" \
+            --arg action "$EVENT_TYPE" \
+            '{path: $path, user: $user, action: $action, priority: "normal"}')
+          curl -sS -X POST "$ACTION_URL" \
+            -H "content-type: application/json" \
+            -H "x-api-key: $SERVICE_API_KEY" \
+            -d "$body" \
+            -w "\nHTTP %{http_code}\n"

@@ -17,24 +17,31 @@ application:
               require-adobe-auth: false
               final: true
 
-          form-submit:
-            function: actions/form-submit/index.js
-            web: 'yes'
-            runtime: nodejs:22
-            inputs:
-              LOG_LEVEL: debug
-              CRM_API_TOKEN: $CRM_API_TOKEN
-            annotations:
-              require-adobe-auth: false
-              final: true
+          # form-submit action source (actions/form-submit) is missing from disk.
+          # Commented out so the app can build; restore the folder to re-enable.
+          # form-submit:
+          #   function: actions/form-submit/index.js
+          #   web: 'yes'
+          #   runtime: nodejs:22
+          #   inputs:
+          #     LOG_LEVEL: debug
+          #     CRM_API_TOKEN: $CRM_API_TOKEN
+          #   annotations:
+          #     require-adobe-auth: false
+          #     final: true
 
           publish-notifier:
             function: actions/publish-events/index.js
             web: 'yes'
             runtime: nodejs:22
             inputs:
-              LOG_LEVEL: debug
+              LOG_LEVEL: info
               SLACK_WEBHOOK_URL: $SLACK_WEBHOOK_URL
+              TEAMS_WEBHOOK_URL: $TEAMS_WEBHOOK_URL
+              SITE_LIVE_HOST: $SITE_LIVE_HOST
+              SERVICE_API_KEY: $SERVICE_API_KEY
             annotations:
-              require-adobe-auth: true
+              # Not Adobe-authenticated: the aem.live publish webhook cannot send IMS
+              # tokens. Access is gated by the SERVICE_API_KEY shared secret in main().
+              require-adobe-auth: false
               final: true
