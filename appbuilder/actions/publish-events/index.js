@@ -25,16 +25,6 @@ function extractEvent (params) {
   }
 }
 
-// Absolute live URL for the page, when SITE_LIVE_HOST is configured.
-function buildLiveUrl (event, siteLiveHost) {
-  if (!siteLiveHost || !event.path) {
-    return ''
-  }
-  const host = siteLiveHost.replace(/^https?:\/\//, '').replace(/\/$/, '')
-  const path = event.path.startsWith('/') ? event.path : `/${event.path}`
-  return `https://${host}${path}`
-}
-
 const PAGE_EXTENSIONS = ['.md', '.html']
 
 // `/faq.md` -> `/faq`; extensionless paths are left as-is.
@@ -61,19 +51,12 @@ async function pageHasRequiredTag (path, siteLiveHost, requiredTag) {
 }
 
 // Teams "Workflows" webhooks expect an Adaptive Card wrapped in a message envelope.
-function buildTeamsMessage (event, siteLiveHost) {
-  const webPath = toWebPath(event.path || '')
+function buildTeamsMessage (event) {
   const facts = [
     { title: 'Action', value: event.action || 'publish' },
-    { title: 'Path', value: webPath || '(no path)' },
+    { title: 'Path', value: toWebPath(event.path || '') || '(no path)' },
     { title: 'By', value: event.user || 'unknown' }
   ]
-
-  // Full URL of the published page, when the live host is known.
-  const liveUrl = buildLiveUrl({ path: webPath }, siteLiveHost)
-  if (liveUrl) {
-    facts.push({ title: 'URL', value: liveUrl })
-  }
 
   const card = {
     type: 'AdaptiveCard',
@@ -151,7 +134,7 @@ async function main (params) {
     }
 
     try {
-      await postWebhook(teamsUrl, buildTeamsMessage(event, params.SITE_LIVE_HOST))
+      await postWebhook(teamsUrl, buildTeamsMessage(event))
     } catch (error) {
       logger.error(`teams notification failed: ${error.message}`)
       return errorResponse(500, 'server error', logger)
