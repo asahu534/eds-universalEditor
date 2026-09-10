@@ -42,7 +42,7 @@ jobs:
             --arg user "$PUBLISHER" \
             --arg action "$EVENT_TYPE" \
             --arg siteLiveHost "$SITE_LIVE_HOST" \
-            '{path: $path, user: $user, action: $action, priority: "normal", SITE_LIVE_HOST: $siteLiveHost}')
+            '{path: $path, user: $user, action: $action, SITE_LIVE_HOST: $siteLiveHost}')
           curl -sS -X POST "$ACTION_URL" \
             -H "content-type: application/json" \
             -H "x-api-key: $SERVICE_API_KEY" \

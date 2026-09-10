@@ -89,9 +89,7 @@ describe('publish-notifier', () => {
 
     const response = await action.main({
       TEAMS_WEBHOOK_URL,
-      SITE_LIVE_HOST: 'main--repo--owner.aem.live',
       path: '/pages/hero',
-      priority: 'high',
       user: 'bob'
     })
 
@@ -104,20 +102,23 @@ describe('publish-notifier', () => {
     expect(body.type).toBe('message')
     expect(body.attachments[0].contentType).toBe('application/vnd.microsoft.card.adaptive')
     const card = body.attachments[0].content
-    const factValues = card.body.find((b) => b.type === 'FactSet').facts.map((f) => f.value)
-    expect(factValues).toContain('/pages/hero')
-    expect(factValues).toContain('bob')
-    expect(card.actions[0].url).toBe('https://main--repo--owner.aem.live/pages/hero')
+    const facts = card.body.find((b) => b.type === 'FactSet').facts
+    expect(facts.map((f) => f.title)).toEqual(['Action', 'Path', 'By'])
+    expect(facts.map((f) => f.value)).toContain('/pages/hero')
+    expect(facts.map((f) => f.value)).toContain('bob')
+    expect(card.actions).toBeUndefined()
   })
 
-  test('should omit the Open page action when SITE_LIVE_HOST is absent', async () => {
+  test('should not include a URL fact or link', async () => {
     fetch.mockResolvedValue({ ok: true })
 
-    await action.main({ TEAMS_WEBHOOK_URL, path: '/pages/hero', priority: 'high' })
+    await action.main({ TEAMS_WEBHOOK_URL, SITE_LIVE_HOST: 'main--repo--owner.aem.live', path: '/pages/hero' })
 
     const [, opts] = callFor(TEAMS_WEBHOOK_URL)
     const card = JSON.parse(opts.body).attachments[0].content
+    const factTitles = card.body.find((b) => b.type === 'FactSet').facts.map((f) => f.title)
     expect(card.actions).toBeUndefined()
+    expect(factTitles).not.toContain('URL')
   })
 
   test('should unwrap CloudEvent `data` envelope', async () => {
