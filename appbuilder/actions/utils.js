@@ -34,6 +34,20 @@ function stringParameters (params) {
       authorization: '<hidden>'
     }
   }
+  // hide the x-api-key shared secret header
+  if (params.__ow_headers?.['x-api-key']) {
+    paramsShallowCopy.__ow_headers = {
+      ...paramsShallowCopy.__ow_headers,
+      'x-api-key': '<hidden>'
+    }
+  }
+  // redact secret-bearing inputs from logs (webhook URLs carry a signature)
+  const secretKeys = ['SERVICE_API_KEY', 'CRM_API_TOKEN', 'SLACK_WEBHOOK_URL', 'TEAMS_WEBHOOK_URL']
+  secretKeys.forEach((key) => {
+    if (paramsShallowCopy[key] !== undefined) {
+      paramsShallowCopy[key] = '<hidden>'
+    }
+  })
   return JSON.stringify(paramsShallowCopy)
 }
 
@@ -118,8 +132,8 @@ function getBearerToken (params) {
 
 /**
  *
- * Validates the `x-api-key` request header against the action's `SERVICE_API_KEY` input
- * using a constant-time comparison to avoid timing attacks.
+ * Validates the `x-api-key` shared-secret request header against the action's
+ * `SERVICE_API_KEY` input using a constant-time comparison to avoid timing attacks.
  *
  * @param {object} params action input parameters.
  *

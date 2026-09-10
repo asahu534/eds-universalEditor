@@ -2,8 +2,8 @@
  * publish-notifier action
  *
  * Invoked by an Adobe I/O Events subscription for AEM publish events (or manually
- * via curl for smoke tests). Posts a message to a Slack Incoming Webhook when a
- * high-priority page is published.
+ * via curl for smoke tests). Posts a notification to Slack and/or Microsoft Teams
+ * for every published page.
  *
  * Deployed as `appbuilder/publish-notifier` (see app.config.yaml).
  *
@@ -13,7 +13,7 @@
 
 const fetch = require('node-fetch')
 const { Core } = require('@adobe/aio-sdk')
-const { errorResponse, stringParameters, checkMissingRequestInputs } = require('../utils')
+const { errorResponse, stringParameters, isAuthorized } = require('../utils')
 
 function extractEvent (params) {
   // I/O Events wraps the payload under `data`; direct calls put fields at the root.
@@ -26,9 +26,65 @@ function extractEvent (params) {
   }
 }
 
+// Absolute live URL for the page, when SITE_LIVE_HOST is configured.
+function buildLiveUrl (event, siteLiveHost) {
+  if (!siteLiveHost || !event.path) {
+    return ''
+  }
+  const host = siteLiveHost.replace(/^https?:\/\//, '').replace(/\/$/, '')
+  const path = event.path.startsWith('/') ? event.path : `/${event.path}`
+  return `https://${host}${path}`
+}
+
 function buildSlackMessage (event) {
   return {
     text: `:rocket: *${event.action}* — \`${event.path || '(no path)'}\` published by *${event.user}* (priority: ${event.priority || 'normal'})`
+  }
+}
+
+// Teams "Workflows" webhooks expect an Adaptive Card wrapped in a message envelope.
+function buildTeamsMessage (event, siteLiveHost) {
+  const facts = [
+    { title: 'Action', value: event.action || 'publish' },
+    { title: 'Path', value: event.path || '(no path)' },
+    { title: 'By', value: event.user || 'unknown' },
+    { title: 'Priority', value: event.priority || 'normal' }
+  ]
+
+  const card = {
+    type: 'AdaptiveCard',
+    $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+    version: '1.4',
+    body: [
+      { type: 'TextBlock', size: 'Medium', weight: 'Bolder', text: 'Page published' },
+      { type: 'FactSet', facts }
+    ]
+  }
+
+  const liveUrl = buildLiveUrl(event, siteLiveHost)
+  if (liveUrl) {
+    card.actions = [{ type: 'Action.OpenUrl', title: 'Open page', url: liveUrl }]
+  }
+
+  return {
+    type: 'message',
+    attachments: [
+      {
+        contentType: 'application/vnd.microsoft.card.adaptive',
+        content: card
+      }
+    ]
+  }
+}
+
+async function postWebhook (url, payload) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  if (!res.ok) {
+    throw new Error(`webhook responded with status ${res.status}`)
   }
 }
 
@@ -39,9 +95,15 @@ async function main (params) {
     logger.info('publish-notifier invoked')
     logger.debug(stringParameters(params))
 
-    const errorMessage = checkMissingRequestInputs(params, ['SLACK_WEBHOOK_URL'], [])
-    if (errorMessage) {
-      return errorResponse(400, errorMessage, logger)
+    // Shared-secret gate for the public webhook; only enforced when a secret is configured.
+    if (params.SERVICE_API_KEY && !isAuthorized(params)) {
+      return errorResponse(401, 'unauthorized', logger)
+    }
+
+    const slackUrl = params.SLACK_WEBHOOK_URL
+    const teamsUrl = params.TEAMS_WEBHOOK_URL
+    if (!slackUrl && !teamsUrl) {
+      return errorResponse(400, "missing parameter(s) 'SLACK_WEBHOOK_URL' or 'TEAMS_WEBHOOK_URL'", logger)
     }
 
     const event = extractEvent(params)
@@ -49,25 +111,32 @@ async function main (params) {
       return errorResponse(400, 'missing parameter(s) \'path\'', logger)
     }
 
-    // Only notify Slack for high-priority pages; still return 200 for other events
-    // so the I/O Events subscription does not retry.
-    if (event.priority !== 'high') {
-      logger.info(`skipping notification for priority='${event.priority}' path='${event.path}'`)
-      return { statusCode: 200, body: { skipped: true, reason: 'priority-not-high' } }
+    // Post to both targets independently so one failure does not suppress the other.
+    const targets = []
+    if (slackUrl) {
+      targets.push({ name: 'slack', promise: postWebhook(slackUrl, buildSlackMessage(event)) })
+    }
+    if (teamsUrl) {
+      targets.push({ name: 'teams', promise: postWebhook(teamsUrl, buildTeamsMessage(event, params.SITE_LIVE_HOST)) })
     }
 
-    const slackRes = await fetch(params.SLACK_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(buildSlackMessage(event))
+    const settled = await Promise.allSettled(targets.map((t) => t.promise))
+    const result = {}
+    settled.forEach((outcome, i) => {
+      const name = targets[i].name
+      result[name] = outcome.status === 'fulfilled'
+      if (outcome.status === 'rejected') {
+        logger.error(`${name} notification failed: ${outcome.reason && outcome.reason.message}`)
+      }
     })
 
-    if (!slackRes.ok) {
-      throw new Error(`Slack webhook responded with status ${slackRes.status}`)
+    const anySucceeded = Object.values(result).some(Boolean)
+    if (!anySucceeded) {
+      return errorResponse(500, 'server error', logger)
     }
 
-    logger.info(`notified Slack for path='${event.path}'`)
-    return { statusCode: 200, body: { notified: true, path: event.path } }
+    logger.info(`notified for path='${event.path}' ${JSON.stringify(result)}`)
+    return { statusCode: 200, body: { notified: true, path: event.path, ...result } }
   } catch (error) {
     logger.error(error)
     return errorResponse(500, 'server error', logger)
