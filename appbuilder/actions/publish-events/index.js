@@ -62,12 +62,18 @@ async function pageHasRequiredTag (path, siteLiveHost, requiredTag) {
 
 // Teams "Workflows" webhooks expect an Adaptive Card wrapped in a message envelope.
 function buildTeamsMessage (event, siteLiveHost) {
+  const webPath = toWebPath(event.path || '')
   const facts = [
     { title: 'Action', value: event.action || 'publish' },
-    { title: 'Path', value: event.path || '(no path)' },
-    { title: 'By', value: event.user || 'unknown' },
-    { title: 'Priority', value: event.priority || 'normal' }
+    { title: 'Path', value: webPath || '(no path)' },
+    { title: 'By', value: event.user || 'unknown' }
   ]
+
+  // Full URL of the published page, when the live host is known.
+  const liveUrl = buildLiveUrl({ path: webPath }, siteLiveHost)
+  if (liveUrl) {
+    facts.push({ title: 'URL', value: liveUrl })
+  }
 
   const card = {
     type: 'AdaptiveCard',
@@ -77,11 +83,6 @@ function buildTeamsMessage (event, siteLiveHost) {
       { type: 'TextBlock', size: 'Medium', weight: 'Bolder', text: 'Page published' },
       { type: 'FactSet', facts }
     ]
-  }
-
-  const liveUrl = buildLiveUrl(event, siteLiveHost)
-  if (liveUrl) {
-    card.actions = [{ type: 'Action.OpenUrl', title: 'Open page', url: liveUrl }]
   }
 
   return {
