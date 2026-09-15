@@ -1,5 +1,5 @@
 export default function decorate(block) {
-
+  
   const parentLink = block.querySelector('a');
   const currentPath = window.location.pathname;
   const currentSegments = currentPath.split('/').filter(Boolean);
