@@ -37,7 +37,7 @@ export default function decorate(block) {
 
     navListParentLink.href = parentPublicPath;
     navListParentLink.textContent = parentTitle;
-    
+
     navListParentItem.append(navListParentLink);
     navList.append(navListParentItem);
   }
