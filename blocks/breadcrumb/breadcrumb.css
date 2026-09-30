@@ -1,0 +1,42 @@
+.section.breadcrumb-container {
+  margin: 0 auto;
+}
+
+.breadcrumb-wrapper .breadcrumb {
+  padding: 16px 0;
+}
+
+.breadcrumb-wrapper .breadcrumb p {
+  margin: 0;
+}
+
+.breadcrumb nav {
+  width: 100%;
+}
+
+.breadcrumb ol {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumb li {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb li:not(:last-child)::after {
+  content: '/';
+  margin-left: 8px;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+}
+
+.breadcrumb li:last-child {
+  font-weight: 600;
+}

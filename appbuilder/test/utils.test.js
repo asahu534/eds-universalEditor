@@ -38,11 +38,12 @@ describe('errorResponse', () => {
 })
 
 describe('stringParameters', () => {
-  test('no auth header', () => {
+  test('masks x-api-key header', () => {
     const params = {
       a: 1, b: 2, __ow_headers: { 'x-api-key': 'fake-api-key' }
     }
-    expect(utils.stringParameters(params)).toEqual(JSON.stringify(params))
+    expect(utils.stringParameters(params)).toEqual(expect.stringContaining('"x-api-key":"<hidden>"'))
+    expect(utils.stringParameters(params)).not.toEqual(expect.stringContaining('fake-api-key'))
   })
   test('with auth header', () => {
     const params = {
